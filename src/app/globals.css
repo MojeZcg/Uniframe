@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.opacity-bottom {
+  mask-image: linear-gradient(black 70%, transparent);
+}
