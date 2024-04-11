@@ -16,7 +16,7 @@ const font = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "UniFrame",
+  title: "Uniframe",
   description: "Empresa de cuadros nacida en Mendoza, Argentina",
 };
 

@@ -1,23 +1,6 @@
-"use client";
-import ImagesOfProduct from "@/component/ImagesOfProduct";
-import { fetchProducts } from "@/lib/data";
-import { ShoppingCartIcon } from "@heroicons/react/16/solid";
-import { Button, Divider, Link, Pagination, Slider } from "@nextui-org/react";
-import NextLink from "next/link";
-import { useEffect, useState } from "react";
+import { Divider, Link, Slider } from "@nextui-org/react";
 
-export default function Home() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchProducts();
-      setProducts(data);
-    };
-
-    fetchData();
-  }, []);
-
+function loading() {
   const priceFilters = [
     {
       id: "1",
@@ -66,10 +49,9 @@ export default function Home() {
     { id: "3", name: "Vintage/Retro", link: "", isDisable: false },
     { id: "4", name: "Ecléctico/Artístico", link: "", isDisable: false },
   ];
-
   return (
-    <div className=" flex h-auto w-full justify-between bg-main-dark  pt-6 text-white ">
-      <div className="ml-3 w-[18rem] 2xl:w-[30rem]">
+    <div className=" flex h-auto w-full justify-between bg-main-dark px-2 pt-6 text-white ">
+      <div className="w-[26rem]  pr-4 2xl:w-[30rem]">
         <h3 className=" text-2xl ">Filtros</h3>
         <Divider className="my-2 w-full bg-neutral-300" />
         <h3 className=" px-2 text-xl underline decoration-neutral-600 underline-offset-4 ">
@@ -134,47 +116,8 @@ export default function Home() {
           ))}
         </ul>
       </div>
-      <div className="w-[calc(100vw-18.5rem)] ">
-        <div className=" flex flex-wrap items-center justify-start gap-4 bg-main-dark px-6 ">
-          {products.map((p: any) => (
-            <NextLink
-              key={p.product_id}
-              href={`http://localhost:3000/${p.product_id}`}
-              className="z-0 mb-4 max-w-[20rem] overflow-hidden rounded-md border-2 border-white "
-            >
-              <div className=" z-50 mb-2 ml-auto mr-auto mt-4 h-[19rem] max-h-[19rem] max-w-[13rem] overflow-visible">
-                <ImagesOfProduct images={p.product_images} />
-              </div>
-
-              <div className=" max-w-[20rem] px-4 py-3">
-                <h4 className="font-semibold text-white ">{p.product_name}</h4>
-                <h6 className="line-clamp-2 text-sm text-gray-300">
-                  {p.product_description}
-                </h6>
-                <div className="flex w-full items-center justify-between pt-2">
-                  <strong className="text-xl font-bold">
-                    {p.product_price} $
-                  </strong>
-                  <Button
-                    size="md"
-                    radius="sm"
-                    color="success"
-                    variant="ghost"
-                    className=" ring-transparent"
-                  >
-                    Agregar <ShoppingCartIcon className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </NextLink>
-          ))}
-        </div>
-        <div className="mt-10 flex w-full items-center justify-end">
-          <div className="max-w-md pr-5 ">
-            <Pagination total={5} initialPage={1} color="primary" />
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
+
+export default loading;

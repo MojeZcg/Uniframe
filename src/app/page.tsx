@@ -75,7 +75,7 @@ export default function Home() {
       <main className="bg-main-dark text-white  ">
         <div className="mb-10 flex h-[34rem] flex-col items-center justify-center md:h-[36rem] md:flex-row 2xl:h-[50rem] ">
           <div className="z-30 flex h-[36rem] w-full flex-col items-center justify-center overflow-hidden bg-main-dark text-white md:h-[36rem] md:flex-row 2xl:h-[44rem] ">
-            <p className="2xl:rounded-l-md] md:bg-main-gradient z-20 md:h-[31rem] md:w-[30rem] md:rounded-l-sm md:border-y-2 md:bg-main-dark  2xl:h-[44rem] 2xl:w-[38rem] ">
+            <p className="2xl:rounded-l-md] z-20 md:h-[31rem] md:w-[30rem] md:rounded-l-sm md:border-y-2 md:bg-main-dark md:bg-main-gradient  2xl:h-[44rem] 2xl:w-[38rem] ">
               <strong className="flex w-full select-none flex-col border-none py-10 text-center  text-5xl font-semibold text-white underline decoration-1 underline-offset-[6px] shadow-lg md:inline-flex md:bg-transparent md:px-6 md:py-0 md:pb-10 md:pt-12 md:text-[2.8rem] md:shadow-none 2xl:pb-16 2xl:pt-20 2xl:text-6xl ">
                 <span className="pb-1  md:text-neutral-100 ">Bienvenido a</span>
                 <span>
@@ -188,7 +188,7 @@ export default function Home() {
         <Divider className="w-full bg-neutral-300" />
       </div>
       <section className="max-w-full  text-white">
-        <div className="bg-main-gradient flex h-[23.4rem] w-full items-center overflow-hidden  text-small ">
+        <div className="flex h-[23.4rem] w-full items-center overflow-hidden bg-main-gradient  text-small ">
           <Suspense fallback={<PrincipalImageSkeleton />}>
             <Image
               width={700}
