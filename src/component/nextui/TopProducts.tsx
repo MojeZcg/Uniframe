@@ -10,7 +10,7 @@ interface Product {
   pricexcuotas: string;
 }
 
-export default function App(products: Product[]) {
+export default function Product(products: Readonly<Product[]>) {
   return (
     <div className="flex flex-wrap items-center justify-center gap-10 ">
       {products.map((product) => (
