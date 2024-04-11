@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-main-dark;
+}
+
 .opacity-bottom {
   mask-image: linear-gradient(black 70%, transparent);
 }
