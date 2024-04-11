@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
 interface Product {
@@ -10,7 +9,7 @@ interface Product {
   pricexcuotas: string;
 }
 
-export default function Product(products: Readonly<Product[]>) {
+export default function TopProducts(products: Readonly<Product[]>) {
   return (
     <div className="flex flex-wrap items-center justify-center gap-10 ">
       {products.map((product) => (
