@@ -1,67 +1,19 @@
 import Carousel from "@/component/Carousel";
-import MobileSlider from "@/component/MobileSlider";
 import { Image, Divider } from "@nextui-org/react";
 import PrincipalImageSkeleton from "@/component/skeletons/PrincipalImageSkeleton";
-import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 import { Suspense } from "react";
+import { ShoppingCartIcon } from "@heroicons/react/20/solid";
+import MobileSlider from "@/component/MobileSlider";
+import { fetchTopProducts } from "@/lib/data";
 
-export default function Home() {
+export default async function Home() {
+  const topProducts = await fetchTopProducts();
+
   const images = [
     "/Home/main-1.jpg",
     "/Home/main-2.jpg",
     "/Home/main-3.jpg",
     "/Home/main-4.png",
-  ];
-
-  const products = [
-    {
-      id: 1,
-      name: "Marco Madera Clasico",
-      image: "/Products/prd-1/1.jpg",
-      cuotas: "3",
-      pricexcuotas: "100",
-      price: "299.99",
-    },
-    {
-      id: 2,
-      name: "Marco Madera Clasico",
-      image: "/Products/product-1.jpg",
-      pricexcuotas: "100",
-      cuotas: "3",
-      price: "299.99",
-    },
-    {
-      id: 3,
-      name: "Marco Madera Clasico",
-      image: "/Products/product-1.jpg",
-      pricexcuotas: "100",
-      cuotas: "3",
-      price: "299.99",
-    },
-    {
-      id: 4,
-      name: "Marco Madera Clasico",
-      image: "/Products/product-1.jpg",
-      pricexcuotas: "100",
-      cuotas: "3",
-      price: "299.99",
-    },
-    {
-      id: 5,
-      name: "Marco Madera Clasico",
-      image: "/Products/product-1.jpg",
-      pricexcuotas: "100",
-      cuotas: "3",
-      price: "299.99",
-    },
-    {
-      id: 6,
-      name: "Marco Madera Clasico",
-      image: "/Products/product-1.jpg",
-      pricexcuotas: "100",
-      cuotas: "3",
-      price: "299.99",
-    },
   ];
 
   const productsToShow = {
@@ -101,37 +53,27 @@ export default function Home() {
           <div>
             <div className="flex w-full items-center justify-center">
               <div className="block h-[32rem] w-[20rem] overflow-hidden  py-8 md:hidden">
-                <MobileSlider products={products} />
+                <MobileSlider products={topProducts} />
               </div>
             </div>
 
-            <div className="hidden w-full flex-wrap items-center justify-center gap-8 pb-14 pt-8 md:flex 2xl:hidden ">
-              {products.slice(0, productsToShow["md"]).map((product) => (
+            <div className="hidden  flex-wrap items-center justify-center gap-8 pb-14 pt-8 md:flex 2xl:hidden ">
+              {topProducts.slice(0, productsToShow["md"]).map((p: any) => (
                 <div
-                  key={product.id}
-                  className="w-[18rem] overflow-hidden rounded-md border bg-[#0a0a0a] px-3 py-4 shadow-lg shadow-gray-700 "
+                  key={p.product_id}
+                  className="max-w-[18rem] overflow-hidden rounded-md border bg-[#0a0a0a] px-3 py-4 shadow-lg shadow-gray-700 "
                 >
                   <div className="  flex w-full items-center justify-center overflow-hidden px-2 py-2">
                     <Image
-                      src={product.image}
-                      alt={product.name}
+                      src={p.product_images[0]}
+                      alt={p.name}
                       className=" h-64  rounded-sm "
                     />
                   </div>
                   <div className="flex flex-col">
-                    <h6 className="block py-2 text-xl">{product.name}</h6>
+                    <h6 className="block py-2 text-xl">{p.name}</h6>
                     <div className="flex flex-col gap-0 pb-4 ">
-                      <strong className="text-2xl">${product.price}</strong>
-                      <p className="text-sm">
-                        en{" "}
-                        <span className="text-base font-bold">
-                          {product.cuotas}{" "}
-                        </span>
-                        <span className=" text-base text-emerald-400">
-                          Cuotas
-                        </span>{" "}
-                        de $ {product.pricexcuotas}
-                      </p>
+                      <strong className="text-2xl">${p.price}</strong>
                     </div>
                     <button className=" flex w-full items-center justify-center gap-1.5 rounded-sm border border-transparent bg-white py-1 text-black transition-all duration-200 ease-in-out hover:border-white hover:bg-[#0f0f0f] hover:text-white ">
                       Agregar al carrito{" "}
@@ -143,32 +85,22 @@ export default function Home() {
             </div>
 
             <div className="hidden w-full flex-wrap items-center justify-center gap-5 py-10 2xl:flex ">
-              {products.slice(0, productsToShow["lg"]).map((product) => (
+              {topProducts.slice(0, productsToShow["lg"]).map((p: any) => (
                 <div
-                  key={product.id}
+                  key={p.product_id}
                   className="min-w-[20rem] max-w-[20rem] overflow-hidden rounded-md border-2 bg-[#090909] px-3 py-4 shadow-xl shadow-gray-700"
                 >
                   <div className="  flex w-full items-center justify-center overflow-hidden py-1">
                     <Image
-                      src={product.image}
-                      alt={product.name}
+                      src={p.image}
+                      alt={p.name}
                       className=" h-64 rounded-sm "
                     />
                   </div>
                   <div className="flex flex-col">
-                    <h6 className="block py-3 text-2xl">{product.name}</h6>
+                    <h6 className="block py-3 text-2xl">{p.name}</h6>
                     <div className="flex flex-col gap-0 pb-6 ">
-                      <strong className="text-3xl">${product.price}</strong>
-                      <p className="text-base">
-                        en{" "}
-                        <span className="text-base font-bold">
-                          {product.cuotas}{" "}
-                        </span>
-                        <span className=" text-base text-emerald-400">
-                          Cuotas
-                        </span>{" "}
-                        de $ {product.pricexcuotas}
-                      </p>
+                      <strong className="text-3xl">${p.price}</strong>
                     </div>
                     <button className=" flex w-full items-center justify-center gap-1.5 rounded-sm border border-transparent bg-white py-1 text-xl text-black transition-all duration-200 ease-in-out hover:border-white hover:bg-[#0f0f0f]  hover:text-white">
                       Agregar al carrito{" "}
