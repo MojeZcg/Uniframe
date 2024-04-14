@@ -1,5 +1,5 @@
 import Carousel from "@/component/Carousel";
-import { Image, Divider } from "@nextui-org/react";
+import { Image, Divider, Button } from "@nextui-org/react";
 import PrincipalImageSkeleton from "@/component/skeletons/PrincipalImageSkeleton";
 import { Suspense } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
@@ -61,7 +61,7 @@ export default async function Home() {
               {topProducts.slice(0, productsToShow["md"]).map((p: any) => (
                 <div
                   key={p.product_id}
-                  className="flex h-[30rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-md border bg-[#0a0a0a] px-3 py-4 shadow-lg shadow-gray-700   "
+                  className="flex h-[30rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-md border bg-[#0a0a0a] px-3  shadow-lg shadow-gray-700   "
                 >
                   <div className="  flex w-full items-center justify-center overflow-hidden px-2 py-2">
                     <Image
@@ -74,16 +74,16 @@ export default async function Home() {
                     <h6 className="font block truncate py-2 text-2xl font-semibold">
                       {p.product_name}
                     </h6>
-                    <div className="flex flex-col gap-0 pb-4 ">
-                      <p className=" mb-2 line-clamp-2 text-sm text-neutral-300">
+                    <div className="flex flex-col gap-0 pb-1 ">
+                      <p className="mb-1 line-clamp-2 text-sm text-neutral-300">
                         {p.product_description}
                       </p>
                       <strong className="text-2xl">${p.product_price}</strong>
                     </div>
-                    <button className=" flex w-full items-center justify-center gap-1.5 rounded-sm border border-transparent bg-white py-1 text-black transition-all duration-200 ease-in-out hover:border-white hover:bg-[#0f0f0f] hover:text-white ">
+                    <Button radius="sm" color="success" variant="ghost">
                       Agregar al carrito{" "}
                       <ShoppingCartIcon className="h-4 w-4" />
-                    </button>
+                    </Button>
                   </div>
                 </div>
               ))}
