@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Image } from "@nextui-org/react";
 
 interface CarouselProps {
   images: string[];
@@ -43,7 +43,8 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
             src={src}
             alt={`Main Image - number ${i}`}
             width={768}
-            height={400}
+            height={1000}
+            className="rounded-none"
           />
         </div>
       ))}

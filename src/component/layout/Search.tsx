@@ -33,7 +33,7 @@ export default function Search({
         onChange={(e) => handleSearch(e.target.value)}
         defaultValue={searchParams.get("q")?.toString()}
         placeholder={placeholder}
-        className=" z-50 h-full w-full border-2 border-neutral-900 px-4 py-1 focus:ring-gray-800 2xl:px-2 2xl:py-3 2xl:text-2xl"
+        className=" z-50 h-full w-full border-2 border-neutral-900 px-4 py-1 focus:ring-red-200 2xl:text-2xl"
       />
       <button type="submit" className="fixed px-3 py-2 ">
         <MagnifyingGlassIcon className="h-6 w-6" />
