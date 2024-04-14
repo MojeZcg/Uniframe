@@ -1,12 +1,15 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
 
 import { ArrowUpRightIcon } from "@heroicons/react/16/solid";
-
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
+
+import { FaInstagram, FaWhatsapp, FaFacebook } from "react-icons/fa";
+
 import RouteList from "@/component/RouteList";
 import Search from "@/component/layout/Search";
 
@@ -38,30 +41,34 @@ export default function RootLayout({
   ];
 
   const socials = [
-    { name: "Whatsapp", path: WHATSAPP_URL },
-    { name: "Facebook", path: "https://www.facebook.com" },
-    { name: "Instagram", path: "https://www.instagram.com/unifoto.digital/" },
+    { name: "Whatsapp", path: WHATSAPP_URL, icon: FaWhatsapp },
+    { name: "Facebook", path: "https://www.facebook.com", icon: FaFacebook },
+    {
+      name: "Instagram",
+      path: "https://www.instagram.com/unifoto.digital/",
+      icon: FaInstagram,
+    },
   ];
 
   return (
     <html lang="es">
       <body className={`${font.className}`}>
-        <nav className=" z-50 w-full items-center bg-gray-50  ">
-          <div className="z-50 flex justify-between  shadow-2xl ">
-            <div className="flex items-center justify-center gap-6 py-3 pl-6 2xl:py-5 2xl:text-xl ">
+        <nav className=" z-50 w-full items-center bg-neutral-50 ">
+          <div className=" flex justify-between   ">
+            <div className="flex items-center justify-center gap-6 py-4 pl-6 2xl:py-5 2xl:text-xl">
               <Link className="flex gap-1  2xl:hidden " href="/">
                 <Image
                   src="/square.svg"
                   alt="Uniframe Logo"
-                  className="aspect-square"
+                  className=""
                   width={45}
-                  height={55}
+                  height={45}
                 />
                 <Image
                   src="/uniframe-cut.png"
                   alt="Uniframe Logo"
                   className="px-2 py-3"
-                  width={150}
+                  width={160}
                   height={30}
                 />
               </Link>
@@ -69,9 +76,9 @@ export default function RootLayout({
                 <Image
                   src="/square.svg"
                   alt="Uniframe Logo"
-                  className="aspect-square"
+                  className=""
                   width={65}
-                  height={65}
+                  height={83}
                 />
                 <Image
                   src="/uniframe-cut.png"
@@ -123,8 +130,9 @@ export default function RootLayout({
               {socials.map((route) => (
                 <li
                   key={route.name}
-                  className="flex items-start gap-[0.20rem] transition-all duration-200 ease-in-out hover:gap-2"
+                  className="flex items-center gap-[0.20rem] transition-all duration-200 ease-in-out hover:gap-2"
                 >
+                  <route.icon className="h-5 w-5 pr-1" />
                   <Link href={route.path}>{route.name}</Link>
                   <ArrowUpRightIcon className="h-3 w-3" />
                 </li>
