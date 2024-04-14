@@ -14,7 +14,7 @@ const config: Config = {
         "main-dark": "#070707",
       },
       backgroundImage: {
-        "main-gradient": "linear-gradient(to right, #020202, #141414);",
+        "main-gradient": "linear-gradient(to bottom, #0f0f0f, #070707);",
       },
     },
   },
