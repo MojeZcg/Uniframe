@@ -92,7 +92,7 @@ export default function RootLayout({
                 <RouteList />
               </div>
             </div>
-            <div className="flex w-1/2 items-center justify-center gap-8 pl-5 pr-16 2xl:w-6/12">
+            <div className="hidden w-1/2 items-center justify-center gap-8 pl-5 pr-16 md:flex 2xl:w-6/12">
               <Search placeholder="Busca productos, materiales y más..." />
               <ShoppingCartIcon className="h-6 w-6 2xl:h-9 2xl:w-9" />
             </div>
@@ -104,8 +104,10 @@ export default function RootLayout({
             </ul>
           )}
         </nav>
+
         {children}
-        <footer className=" flex h-[20rem] w-full flex-col bg-main-dark px-12 text-white md:h-64 md:flex-row  md:py-4">
+
+        <footer className=" flex h-[20rem] w-full flex-col justify-between bg-main-dark px-6 text-white md:h-64  md:flex-row md:py-4">
           <div className="w-30 flex max-w-md flex-col items-start justify-between gap-5 overflow-hidden py-3 md:py-5 ">
             <h1 className=" line-clamp-4 text-2xl md:text-3xl ">
               TRANSFORMANDO ESPACIOS, ENMARCANDO MOMENTOS.
@@ -148,6 +150,15 @@ export default function RootLayout({
                 </li>
               ))}
             </ul>
+            <div className="flex w-auto items-end justify-end self-end">
+              <p className="text-xs">
+                Diseñado y desarrollado por{" "}
+                <Link href="https://www.linkedin.com/in/montenegrowalter/">
+                  Walter Jesus Montenegro
+                </Link>{" "}
+                © 2024
+              </p>
+            </div>
           </div>
         </footer>
       </body>
