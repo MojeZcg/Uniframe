@@ -7,7 +7,6 @@ import MobileSlider from "@/component/MobileSlider";
 import { fetchTopProducts } from "@/lib/data";
 import TopProductsSkeleton from "@/component/skeletons/TopProductSkeleton";
 import Link from "next/link";
-import ImagesOfProduct from "@/component/ImagesOfProduct";
 
 export default async function Home() {
   const topProducts = await fetchTopProducts();
