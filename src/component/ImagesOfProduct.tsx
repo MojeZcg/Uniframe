@@ -4,11 +4,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Image } from "@nextui-org/react";
 
-export default function HoverImageProduct({
+export default function ImagesOfProduct({
   images,
-}: Readonly<{ images: string }>) {
+  name,
+}: Readonly<{ images: string; name: string }>) {
   const settings = {
-    dots: true,
+    dots: false,
     slidesToShow: 1,
     autoplay: false,
   };
@@ -17,14 +18,16 @@ export default function HoverImageProduct({
     <div>
       <Slider {...settings}>
         {urls.map((url, i) => (
-          <Image
-            key={url}
-            src={url}
-            height={300}
-            width={220}
-            alt={i + " url"}
-            className=" z-50 rounded-none"
-          />
+          <div
+            key={i + url}
+            className="  flex w-full items-center justify-center overflow-hidden"
+          >
+            <Image
+              src={url}
+              alt={name + " product image n°" + i}
+              className=" h-72 rounded-none"
+            />
+          </div>
         ))}
       </Slider>
     </div>
