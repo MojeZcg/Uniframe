@@ -135,15 +135,18 @@ export default function Home() {
         </ul>
       </div>
       <div className="w-[calc(100vw-18.5rem)] ">
-        <div className=" flex flex-wrap items-center justify-start gap-4 bg-main-dark px-6 ">
+        <div className=" flex flex-wrap items-center justify-start gap-x-6 gap-y-4 bg-main-dark px-8 ">
           {products.map((p: any) => (
             <NextLink
               key={p.product_id}
               href={`http://localhost:3000/${p.product_id}`}
-              className="z-0 mb-4 max-w-[20rem] overflow-hidden rounded-md border-2 border-white "
+              className="z-0 mb-4 w-[19rem] overflow-hidden rounded-lg border-2 border-white "
             >
-              <div className=" z-50 mb-2 ml-auto mr-auto mt-4 h-[19rem] max-h-[19rem] max-w-[13rem] overflow-visible">
-                <ImagesOfProduct images={p.product_images} />
+              <div className=" z-50 ml-auto mr-auto mt-4 h-[19rem] w-[13rem] overflow-visible">
+                <ImagesOfProduct
+                  images={p.product_images}
+                  name={p.product_name}
+                />
               </div>
 
               <div className=" max-w-[20rem] px-4 py-3">
