@@ -107,7 +107,7 @@ export default function RootLayout({
 
         {children}
 
-        <footer className=" flex h-[20rem] w-full flex-col justify-between bg-main-dark px-6 text-white md:h-64  md:flex-row md:py-4">
+        <footer className=" flex h-[20rem] w-full flex-col justify-start bg-main-dark px-6 text-white md:h-64  md:flex-row md:pt-4">
           <div className="w-30 flex max-w-md flex-col items-start justify-between gap-5 overflow-hidden py-3 md:py-5 ">
             <h1 className=" line-clamp-4 text-2xl md:text-3xl ">
               TRANSFORMANDO ESPACIOS, ENMARCANDO MOMENTOS.
@@ -150,17 +150,20 @@ export default function RootLayout({
                 </li>
               ))}
             </ul>
-            <div className="flex w-auto items-end justify-end self-end">
-              <p className="text-xs">
-                Diseñado y desarrollado por{" "}
-                <Link href="https://www.linkedin.com/in/montenegrowalter/">
-                  Walter Jesus Montenegro
-                </Link>{" "}
-                © 2024
-              </p>
-            </div>
           </div>
         </footer>
+        <div className="flex w-auto items-end justify-end self-end ">
+          <p className="pb-2 pr-6 text-sm text-neutral-500">
+            Diseñado y desarrollado por{" "}
+            <Link
+              className="text-white"
+              href="https://www.linkedin.com/in/montenegrowalter/"
+            >
+              Walter Montenegro
+            </Link>{" "}
+            © 2024
+          </p>
+        </div>
       </body>
     </html>
   );
