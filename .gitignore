@@ -37,6 +37,8 @@ next-env.d.ts
 
 # Created by https://www.toptal.com/developers/gitignore/api/nextjs,vercel,node,react
 # Edit at https://www.toptal.com/developers/gitignore?templates=nextjs,vercel,node,react
+## Bun local
+bun.lockb
 
 ### NextJS ###
 # dependencies
