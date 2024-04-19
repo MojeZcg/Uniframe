@@ -1,5 +1,5 @@
 import Carousel from "@/component/Carousel";
-import { Image, Divider, Button, Card, Skeleton } from "@nextui-org/react";
+import { Image, Divider, Button } from "@nextui-org/react";
 import PrincipalImageSkeleton from "@/component/skeletons/PrincipalImageSkeleton";
 import { Suspense } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
@@ -67,12 +67,13 @@ export default async function Home() {
                   <Link
                     key={p.product_id}
                     href={`/store/product/${p.product_id}`}
-                    className="flex h-[29.2rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-xl  border bg-[#0a0a0a] px-3 shadow-lg shadow-gray-700   "
+                    className="flex h-[30rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-xl  border bg-[#0a0a0a] px-3 shadow-lg shadow-gray-700   "
                   >
-                    <div>
-                      <ImagesOfProduct
-                        name={p.product_name}
-                        images={p.product_images}
+                    <div className="  flex w-full items-center justify-center overflow-hidden ">
+                      <Image
+                        src={p.product_images.split(",", 1)}
+                        alt={"Main image of" + p.product_id}
+                        className=" h-72 rounded-sm"
                       />
                     </div>
                     <div className="flex w-full flex-col">
