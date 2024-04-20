@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 const WHATSAPP_URL =
-  "https://wa.me/542614995742?text=Hola%2C%20estoy%20interesado%20en%20los%20productos%20que%20ofrece%20UniFrame.%20%C2%BFPodr%C3%ADan%20proporcionarme%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20productos%3F%20%C2%A1Gracias%21";
+  "https://wa.me/542614995742?text=Hola%21%2C%20estoy%20interesado%20en%20los%20productos%20que%20ofrece%20Uniframe.%20%C2%BFPodr%C3%ADan%20proporcionarme%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20productos%3F";
 
 export default function RootLayout({
   children,
@@ -34,10 +34,10 @@ export default function RootLayout({
   const isMenuOpen = false;
 
   const routes = [
-    { name: "Inicio", path: "/", current: true },
-    { name: "Tienda", path: "/store", current: false },
-    { name: "Contactanos", path: "/contact", current: false },
-    { name: "Nosotros", path: "/about", current: false },
+    { name: "Inicio", path: "/" },
+    { name: "Tienda", path: "/store" },
+    { name: "Contactanos", path: "/contact" },
+    { name: "Nosotros", path: "/about" },
   ];
 
   const socials = [
@@ -130,13 +130,12 @@ export default function RootLayout({
                 CONTACTANOS
               </label>
               {socials.map((route) => (
-                <li
-                  key={route.name}
-                  className="flex items-center gap-[0.20rem] transition-all duration-200 ease-in-out hover:gap-2"
-                >
+                <li key={route.name} className="flex items-center gap-1.5 ">
                   <route.icon className="h-5 w-5 pr-1" />
-                  <Link href={route.path}>{route.name}</Link>
-                  <ArrowUpRightIcon className="h-3 w-3" />
+                  <div className="flex items-center gap-1 transition-all duration-200 ease-in-out hover:pl-2">
+                    <Link href={route.path}>{route.name}</Link>
+                    <ArrowUpRightIcon className="h-3 w-3" />
+                  </div>
                 </li>
               ))}
             </ul>
@@ -145,7 +144,10 @@ export default function RootLayout({
                 UNIFRAME
               </label>
               {routes.map((route) => (
-                <li key={route.name} className="flex items-center gap-2">
+                <li
+                  key={route.name}
+                  className="flex items-center gap-2 transition-all duration-100 ease-in-out  hover:pl-1.5"
+                >
                   <Link href={route.path}>{route.name}</Link>
                 </li>
               ))}

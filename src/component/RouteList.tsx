@@ -9,7 +9,7 @@ export default function RouteList() {
   const routes = [
     { name: "Inicio", path: "/", current: pathName == "/" },
     { name: "Tienda", path: "/store", current: pathName == "/store" },
-    { name: "Precios", path: "/prices", current: pathName == "/prices" },
+    { name: "Nosotros", path: "/about", current: pathName == "/about" },
     { name: "Contactanos", path: "/contact", current: pathName == "/contact" },
   ];
 

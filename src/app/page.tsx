@@ -66,7 +66,7 @@ export default async function Home() {
                   <Link
                     key={p.product_id}
                     href={`/store/product/${p.product_id}`}
-                    className="flex h-[30rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-xl  border bg-[#0a0a0a] px-3 shadow-lg shadow-gray-700   "
+                    className="flex h-[30.5rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-xl  border bg-[#0a0a0a] px-4  shadow-lg shadow-gray-700   "
                   >
                     <div className="  flex w-full items-center justify-center overflow-hidden ">
                       <Image
@@ -165,17 +165,19 @@ export default async function Home() {
         PROCESO DE ELABORACIÓN
       </h2>
       <div className="flex w-full items-center justify-center  ">
-        <Divider className="w-full bg-neutral-300" />
+        <Divider className="w-full bg-white pt-0.5" />
       </div>
       <section className="max-w-full  text-white">
         <div className="flex h-[23.4rem] w-full items-center overflow-hidden bg-main-gradient  text-small ">
           <Suspense fallback={<PrincipalImageSkeleton />}>
-            <Image
-              width={700}
-              src="/Products/materials.jpg"
-              alt="Corner Image 1"
-              className=" rounded-none bg-gray-700 object-cover"
-            />
+            <div className="bg-black opacity-50">
+              <Image
+                width={700}
+                src="/Products/materials.jpg"
+                alt="Collage image 1"
+                className=" rounded-none bg-gray-950 object-cover "
+              />
+            </div>
           </Suspense>
           <Divider orientation="vertical" className="mx-0 bg-white pr-0.5" />
           <p className="max-w-[53rem] px-10 text-4xl font-normal leading-normal">
@@ -183,15 +185,14 @@ export default async function Home() {
             DURADEROS, SON EL EPÍTOME DE LA CALIDAD Y EL BUEN GUSTO.
           </p>
         </div>
-        <div className="flex w-full items-center justify-center  ">
-          <Divider className="w-full bg-neutral-300" />
+        <div className="flex w-full items-center  justify-center  ">
+          <Divider className="w-full bg-white pt-0.5" />
         </div>
         <div className=" flex h-screen w-full items-center justify-center overflow-hidden ">
-          <div className="absolute z-30 h-screen w-full bg-black opacity-20"></div>
-
+          <div className="absolute z-30 h-screen w-full bg-black opacity-60"></div>
           <Image
             src="/wall.jpg"
-            alt="Two Frames "
+            alt="Collage image 2"
             className=" z-10 w-full rounded-none  object-cover"
           />
         </div>
