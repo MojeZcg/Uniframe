@@ -126,9 +126,12 @@ export default function RootLayout({
 
           <div className="flex items-start justify-center gap-10 md:px-10 md:pb-10 md:pt-5">
             <ul className="flex flex-col gap-1 text-sm md:text-base">
-              <label htmlFor="Pages" className="pb-4 text-lg font-semibold">
+              <Link
+                href="/contact"
+                className="pb-4 text-lg font-semibold transition-all duration-200 ease-in-out hover:scale-105"
+              >
                 CONTACTANOS
-              </label>
+              </Link>
               {socials.map((route) => (
                 <li key={route.name} className="flex items-center gap-1.5 ">
                   <route.icon className="h-5 w-5 pr-1" />
@@ -140,9 +143,12 @@ export default function RootLayout({
               ))}
             </ul>
             <ul className="flex flex-col gap-1 text-sm md:text-base">
-              <label htmlFor="Pages" className="pb-4 text-lg font-semibold">
+              <Link
+                href="/"
+                className="pb-4 text-lg font-semibold transition-all duration-200 ease-in-out hover:scale-105"
+              >
                 UNIFRAME
-              </label>
+              </Link>
               {routes.map((route) => (
                 <li
                   key={route.name}
