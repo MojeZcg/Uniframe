@@ -161,7 +161,7 @@ export default function RootLayout({
               className="text-white"
               href="https://www.linkedin.com/in/montenegrowalter/"
             >
-              Walter Montenegro
+              Walter J. Montenegro
             </Link>{" "}
             © 2024
           </p>
