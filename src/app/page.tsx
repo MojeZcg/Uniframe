@@ -27,7 +27,7 @@ export default async function Home() {
   return (
     <div>
       <main className=" text-white  ">
-        <div className=" flex h-[calc(100vh)] flex-col items-start md:h-[calc(100vh-4.8rem)] md:flex-row md:justify-center 2xl:h-[calc(100vh-15.55rem)] ">
+        <div className=" flex h-[calc(100vh)] flex-col items-start md:h-[calc(100vh-4.8rem)] md:flex-row md:justify-center 2xl:h-[calc(100vh-10rem)] ">
           <div className="z-30 flex h-[calc(100vh)] w-full flex-col items-center justify-center overflow-hidden bg-main-dark text-white md:h-[calc(100vh-4.8rem)] md:flex-row 2xl:h-[calc(100vh-13rem)]">
             <div className="z-20 flex h-[calc(100vh-30rem)] items-start justify-center border-b-1 border-white bg-main-dark  shadow-2xl shadow-black md:h-[calc(100vh-4.8rem)] md:w-[33.5rem]  2xl:h-[calc(100vh-13rem)] 2xl:w-[46rem]">
               <div className=" flex w-full flex-col items-start justify-center bg-main-dark px-8 text-start md:w-72 md:p-0 2xl:w-[26rem] 2xl:pt-6">
