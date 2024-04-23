@@ -15,7 +15,7 @@ datasource db {
 
 model products {
   product_id          Int                 @id @default(autoincrement())
-  product_name        String              @db.VarChar(60)
+  product_name        String              @db.VarChar(100)
   product_price       Decimal             @db.Decimal(10, 2)
   product_images      String              @db.Text
   product_available   Boolean             @default(true)
@@ -28,7 +28,7 @@ model products {
 model users {
   user_id           Int                 @id @default(autoincrement())
   user_email        String              @unique(map: "user_email") @db.VarChar(70)
-  user_name         String              @db.VarChar(100)
+  user_name         String              @db.VarChar(60)
   user_phone        String              @unique(map: "user_phone") @db.VarChar(20)
   product_purchases product_purchases[]
 }
@@ -45,7 +45,7 @@ model product_purchases {
   product_sold         Int
   amount_sold          Decimal         @db.Decimal(10, 2)
   quantity_of_product  Int
-  pay_method           String          @db.VarChar(60)
+  pay_method           String          @db.VarChar(70)
   transaction_datetime DateTime        @default(dbgenerated("(now())")) @db.Timestamp(0)
   users                users           @relation(fields: [buyer_user], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "product_purchases_ibfk_1")
   products             products        @relation(fields: [product_sold], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "product_purchases_ibfk_2")
@@ -54,4 +54,9 @@ model product_purchases {
   @@index([buyer_user], map: "buyer_user")
   @@index([pay_method], map: "pay_method")
   @@index([product_sold], map: "product_sold")
+}
+
+model available_materials {
+  material_id   Int    @id @default(autoincrement())
+  material_name String @db.VarChar(70)
 }

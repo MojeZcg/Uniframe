@@ -134,8 +134,8 @@ export default function Home() {
           ))}
         </ul>
       </div>
-      <div className="w-[calc(100vw-18.5rem)] ">
-        <div className=" flex flex-wrap items-center justify-start gap-x-6 gap-y-4 bg-main-dark px-8 ">
+      <div className=" w-[calc(100vw-18rem)]">
+        <div className=" flex flex-wrap items-center justify-center gap-x-5 gap-y-4 bg-main-dark  ">
           {products.map((p: any) => (
             <NextLink
               key={p.product_id}
@@ -172,9 +172,22 @@ export default function Home() {
             </NextLink>
           ))}
         </div>
-        <div className="mt-10 flex w-full items-center justify-end">
+        <div className="mt-10 flex w-full items-center justify-end pr-10">
           <div className="max-w-md pr-5 ">
-            <Pagination total={5} initialPage={1} color="primary" />
+            <Pagination
+              total={5}
+              initialPage={1}
+              variant="light"
+              loop
+              showControls
+              classNames={{
+                wrapper: "transition-all duration-300 ",
+                prev: "bg-neutral-900 text-white hover:text-black",
+                next: "bg-neutral-900 text-white hover:text-black",
+                item: "text-white border-1 border-white hover:text-black",
+                cursor: "bg-neutral-950 border-1 rounded-xl border-neutral-400",
+              }}
+            />
           </div>
         </div>
       </div>
