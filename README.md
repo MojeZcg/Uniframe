@@ -1,20 +1,55 @@
 # Uniframe
 
-Uniframe is a project built with Next.js and TypeScript, aimed at [describe your project briefly].
+Uniframe is a project built with Next.js and TypeScript, aimed at .
 
 ## Description
 
-[Insert a brief description of your project here]
+Uniframe specializes in premium frames for photographs. Browse our curated collection to find the perfect frame for your cherished memories. Elevate your images and transform your space with Uniframe.
+
+## Installation
+
+First clone the repository by ssh:
+
+```bash
+git clone git@github.com:MojeZcg/Uniframe.git
+cd .\uniframe\
+```
+
+You can install the dependencies using your preferred package manager:
+
+### npm
+
+```bash
+npm i
+```
+
+### pnpm
+
+```bash
+pnpm install
+```
+
+### yarn
+
+```bash
+yarn install
+```
+
+### bun
+
+```bash
+bun install
+```
 
 ## Author
 
-- [Your Name](https://github.com/yourusername)
+- [Walter J. Montenegro](https://github.com/MojeZcg)
 
 ## Important Links
 
-- [GitHub Repository](https://github.com/yourusername/uniframe)
-- [Documentation](https://yourwebsite.com/uniframe/docs)
-- [Live Demo](https://yourwebsite.com/uniframe/demo)
+- [GitHub Repository](https://github.com/MojeZcg/uniframe)
+- [Documentation](https://yourwebsite.com/docs)
+- [Live Demo](https://yourwebsite.com/demo)
 
 ## How to Contribute
 
@@ -33,4 +68,4 @@ We welcome contributions from the community! If you'd like to contribute to Unif
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/yourusername/uniframe/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/MojeZcg/uniframe/blob/main/LICENSE) file for details.
