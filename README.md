@@ -20,15 +20,9 @@ You can install the dependencies using your preferred package manager:
 ```bash
 npm i
 
-or
-
 pnpm install
 
-or
-
 yarn install
-
-or
 
 bun install
 ```
