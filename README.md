@@ -17,13 +17,19 @@ cd .\uniframe\
 
 You can install the dependencies using your preferred package manager:
 
-```bash
+```
 npm i
+```
 
+```
 pnpm install
+```
 
+```
 yarn install
+```
 
+```
 bun install
 ```
 
