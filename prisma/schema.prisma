@@ -18,8 +18,8 @@ model products {
   product_name        String              @db.VarChar(100)
   product_price       Decimal             @db.Decimal(10, 2)
   product_images      String              @db.Text
-  product_available   Boolean             @default(true)
-  product_description String              @db.VarChar(150)
+  product_availables  Int                 @default(0)
+  product_description String              @db.VarChar(300)
   product_view_count  Int                 @default(0)
   product_created_at  DateTime            @default(now()) @db.Timestamp(0)
   product_purchases   product_purchases[]
