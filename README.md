@@ -15,12 +15,14 @@ git clone git@github.com:MojeZcg/Uniframe.git
 cd .\uniframe\
 ```
 
-You can install the dependencies using your preferred package manager:
-
-### npm
+### You can install the dependencies using your preferred package manager:
 
 ```bash
-npm i
+npm install
+
+pnpm install
+
+bun install
 ```
 
 ## Author
@@ -45,7 +47,7 @@ We welcome contributions from the community! If you'd like to contribute to Unif
 
 ## Version Information
 
-- Next.js: v14.2.2
+- Next.js: v14.2.3
 - Node.js: v20.12.2
 
 ## License
