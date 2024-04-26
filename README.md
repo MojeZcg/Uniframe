@@ -23,24 +23,6 @@ You can install the dependencies using your preferred package manager:
 npm i
 ```
 
-### pnpm
-
-```bash
-pnpm install
-```
-
-### yarn
-
-```bash
-yarn install
-```
-
-### bun
-
-```bash
-bun install
-```
-
 ## Author
 
 - [Walter J. Montenegro](https://github.com/MojeZcg)
