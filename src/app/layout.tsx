@@ -54,7 +54,7 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${font.className}`}>
         <nav className=" z-50 w-full items-center bg-neutral-50 ">
-          <div className=" flex justify-between   ">
+          <div className=" flex justify-between">
             <div className="flex items-center justify-center gap-6 py-4 pl-6 2xl:py-5 2xl:text-xl">
               <Link className="flex gap-1  2xl:hidden " href="/">
                 <Image
@@ -107,21 +107,11 @@ export default function RootLayout({
 
         {children}
 
-        <footer className=" flex h-[20rem] w-full flex-col justify-start bg-main-dark px-6 text-white md:h-64  md:flex-row md:pt-4">
+        <footer className=" flex h-[20rem] w-full flex-col justify-start bg-main-dark px-6 text-white md:h-52 md:flex-row md:pt-4">
           <div className="w-30 flex max-w-md flex-col items-start justify-between gap-5 overflow-hidden py-3 md:py-5 ">
             <h1 className=" line-clamp-4 text-2xl md:text-3xl ">
               TRANSFORMANDO ESPACIOS, ENMARCANDO MOMENTOS.
             </h1>
-            <Link className=" flex items-center justify-center" href="/">
-              <Image
-                src="/square-white.svg"
-                alt="Uniframe Logo"
-                className="aspect-square"
-                width={45}
-                height={45}
-              />
-              <strong className="ml-2 text-xl md:text-lg">Uniframe</strong>
-            </Link>
           </div>
 
           <div className="flex items-start justify-center gap-10 md:px-10 md:pb-10 md:pt-5">
@@ -160,8 +150,20 @@ export default function RootLayout({
             </ul>
           </div>
         </footer>
-        <div className="flex w-auto items-end justify-end self-end ">
-          <p className="pb-2 pr-6 text-sm text-neutral-500">
+        <div className="flex w-full items-center justify-between self-end px-6 pb-4 ">
+          <Link className=" flex items-center justify-center" href="/">
+            <Image
+              src="/square-white.svg"
+              alt="Uniframe Logo"
+              className="aspect-square"
+              width={45}
+              height={45}
+            />
+            <strong className="ml-2 text-xl text-white md:text-lg">
+              Uniframe
+            </strong>
+          </Link>
+          <p className="  text-sm text-neutral-500">
             Diseñado y desarrollado por{" "}
             <Link
               className="text-white"

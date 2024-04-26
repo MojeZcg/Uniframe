@@ -5,7 +5,12 @@ export async function fetchProducts() {
 }
 
 export async function fetchTopProducts() {
-  const res = await fetch("http://localhost:3000/api/products/top/");
+  const res = await fetch("http://localhost:3000/api/products/top/", {
+    method: "GET",
+    next: {
+      revalidate: 5000,
+    },
+  });
   const data = await res.json();
   return data;
 }

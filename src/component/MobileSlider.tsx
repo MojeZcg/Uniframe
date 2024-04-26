@@ -8,16 +8,18 @@ import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 import { Button, Image } from "@nextui-org/react";
 import Link from "next/link";
 
-interface Product {
+type Product = {
   product_id: number;
   product_name: string;
-  product_images: string;
   product_price: string;
-  product_description: string;
+  product_images: string;
   product_available: boolean;
-}
+  product_description: string;
+  product_view_count: number;
+  product_created_at: string;
+};
 
-const MobileSlider = ({ products }: { products: Product[] }) => {
+const MobileSlider = ({ products }: { products: Product[] | null }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -32,7 +34,7 @@ const MobileSlider = ({ products }: { products: Product[] }) => {
 
   return (
     <Slider {...settings} className="z-50">
-      {products.map((p) => (
+      {products?.map((p) => (
         <Link
           key={p.product_id}
           href={`/store/product/${p.product_id}`}

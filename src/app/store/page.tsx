@@ -1,21 +1,42 @@
 "use client";
-import ImagesOfProduct from "@/component/ImagesOfProduct";
-import { fetchProducts } from "@/lib/data";
+import ImagesOfProduct from "@/component/store/ImagesOfProduct";
 import { ShoppingCartIcon } from "@heroicons/react/16/solid";
 import { Button, Divider, Link, Pagination, Slider } from "@nextui-org/react";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [products, setProducts] = useState([]);
+type Product = {
+  product_id: number;
+  product_name: string;
+  product_price: string;
+  product_images: string;
+  product_available: boolean;
+  product_description: string;
+  product_view_count: number;
+  product_created_at: string;
+};
+
+export default function Store() {
+  const [products, setProducts] = useState<Product[] | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const getProducts = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("http://localhost:3000/api/products/");
+      if (res) {
+        const data = await res.json();
+        if (data) setProducts(data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchProducts();
-      setProducts(data);
-    };
-
-    fetchData();
+    getProducts();
   }, []);
 
   const priceFilters = [
@@ -136,7 +157,8 @@ export default function Home() {
       </div>
       <div className=" w-[calc(100vw-18rem)]">
         <div className=" flex flex-wrap items-center justify-center gap-x-5 gap-y-4 bg-main-dark  ">
-          {products.map((p: any) => (
+          {loading && <div>Loading...</div>}
+          {products?.map((p: Product) => (
             <NextLink
               key={p.product_id}
               href={`http://localhost:3000/${p.product_id}`}
@@ -184,8 +206,8 @@ export default function Home() {
                 wrapper: "transition-all duration-300 ",
                 prev: "bg-neutral-900 text-white hover:text-black",
                 next: "bg-neutral-900 text-white hover:text-black",
-                item: "text-white border-1 border-white hover:text-black",
-                cursor: "bg-neutral-950 border-1 rounded-xl border-neutral-400",
+                item: "text-white border-1 border-neutral-700 hover:text-black",
+                cursor: "bg-neutral-950 border-1 rounded-xl border-white",
               }}
             />
           </div>

@@ -35,7 +35,7 @@ export default function Home() {
             </ul>
           </div>
           <div className="mt-12">
-            <h2 className="text-lg font-extrabold">Socials</h2>
+            <h2 className="text-lg font-extrabold text-neutral-50">Socials</h2>
             <ul className="mt-3 flex space-x-4">
               <li className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e6e6e6cf]">
                 <Link href="">
@@ -48,7 +48,7 @@ export default function Home() {
                 </Link>
               </li>
               <li className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e6e6e6cf]">
-                <Link href="">
+                <Link href="https://www.instagram.com/unifoto.digital/">
                   <FaInstagram className="h-5 w-5" />
                 </Link>
               </li>
@@ -60,26 +60,26 @@ export default function Home() {
           <input
             type="text"
             placeholder="Name"
-            className="w-full rounded-md border px-4 py-2.5 text-sm outline-slate-500"
+            className="w-full rounded-md border bg-neutral-900 px-4 py-2.5 text-sm text-white outline-slate-500"
           />
           <input
             type="email"
             placeholder="Email"
-            className="w-full rounded-md border px-4 py-2.5 text-sm outline-slate-500"
+            className="w-full rounded-md border bg-neutral-900 px-4 py-2.5 text-sm text-white outline-slate-500"
           />
           <input
             type="text"
             placeholder="Subject"
-            className="w-full rounded-md border px-4 py-2.5 text-sm outline-slate-500"
+            className="w-full rounded-md border bg-neutral-900 px-4 py-2.5 text-sm text-white outline-slate-500"
           />
           <textarea
             placeholder="Message"
             rows={6}
-            className="w-full rounded-md border px-4 pt-2.5 text-sm outline-slate-500"
+            className="w-full rounded-md border bg-neutral-900 px-4 pt-2.5 text-sm text-white outline-slate-500"
           ></textarea>
           <button
             type="button"
-            className="w-full rounded-md bg-neutral-600 px-4 py-2.5 text-sm font-semibold text-black transition-colors duration-250 ease-in-out hover:bg-slate-200"
+            className="w-full rounded-md bg-neutral-800 px-4 py-2.5 text-sm font-semibold text-black transition-colors duration-250 ease-in-out hover:bg-slate-200"
           >
             Send
           </button>

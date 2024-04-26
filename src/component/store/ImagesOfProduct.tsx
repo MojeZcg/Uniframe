@@ -2,7 +2,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Image from "next/image";
+import { Image } from "@nextui-org/react";
 
 export default function ImagesOfProduct({
   images,
@@ -21,14 +21,12 @@ export default function ImagesOfProduct({
         {urls.map((url, i) => (
           <div
             key={i + url}
-            className="  flex w-full items-center justify-center overflow-hidden"
+            className="  flex w-full items-center justify-center overflow-hidden "
           >
             <Image
-              height={432}
-              width={288}
               src={url}
               alt={name + " product image n°" + i}
-              className=" h-72 rounded-none"
+              className=" h-72 rounded-none object-fill"
             />
           </div>
         ))}

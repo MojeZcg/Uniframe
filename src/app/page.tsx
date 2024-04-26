@@ -1,16 +1,10 @@
 import Carousel from "@/component/Carousel";
-import { Image, Divider, Button } from "@nextui-org/react";
+import { Image, Divider, Card, Skeleton } from "@nextui-org/react";
 import PrincipalImageSkeleton from "@/component/skeletons/PrincipalImageSkeleton";
 import { Suspense } from "react";
-import { ShoppingCartIcon } from "@heroicons/react/20/solid";
-import MobileSlider from "@/component/MobileSlider";
-import { fetchTopProducts } from "@/lib/data";
-import TopProductsSkeleton from "@/component/skeletons/TopProductSkeleton";
-import Link from "next/link";
+import { TopProducts } from "@/component/TopProducts";
 
 export default async function Home() {
-  const topProducts = await fetchTopProducts();
-
   const images = [
     "https://i0.wp.com/www.hannahinthehouse.com/wp-content/uploads/2018/04/bed11copy.jpg?resize=1080%2C1627",
     "https://i.pinimg.com/originals/ed/99/75/ed9975a56d44f1b9728b893695214bde.jpg",
@@ -18,11 +12,7 @@ export default async function Home() {
     "https://i.pinimg.com/originals/48/44/f6/4844f69f0d491706f946ef4d6418fdcd.jpg",
   ];
 
-  const productsToShow = {
-    sm: 3, // Móvil: 3 productos
-    md: 4, // Tableta: 4 productos
-    lg: 5, // Pantalla grande: 6 productos
-  };
+  const timesSkeleton = [0, 1, 2, 3];
 
   return (
     <div>
@@ -53,112 +43,63 @@ export default async function Home() {
             MAS VENDIDOS
           </h3>
 
-          <div className=" md:py-8">
-            <div className="flex w-full items-center justify-center">
-              <div className="block h-[32rem] w-[20.5rem] overflow-hidden py-6 md:hidden">
-                <MobileSlider products={topProducts} />
-              </div>
-            </div>
-
-            <div className="hidden flex-wrap items-center justify-center gap-6 md:flex 2xl:hidden ">
-              <Suspense fallback={<TopProductsSkeleton />}>
-                {topProducts.slice(0, productsToShow["md"]).map((p: any) => (
-                  <Link
-                    key={p.product_id}
-                    href={`/store/product/${p.product_id}`}
-                    className="flex h-[30.5rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-xl  border bg-[#0a0a0a] px-4  shadow-lg shadow-gray-700   "
-                  >
-                    <div className="  flex w-full items-center justify-center overflow-hidden ">
-                      <Image
-                        src={p.product_images.split(",", 1)}
-                        alt={"Main image of" + p.product_id}
-                        className=" h-72 rounded-sm"
-                      />
-                    </div>
-                    <div className="flex w-full flex-col">
-                      <h6 className="font block truncate py-2 text-2xl font-semibold">
-                        {p.product_name}
-                      </h6>
-                      <div className="flex flex-col gap-0 pb-2 ">
-                        <p className="mb-1 line-clamp-2 text-sm text-neutral-300">
-                          {p.product_description}
-                        </p>
-                        <strong className="text-2xl">${p.product_price}</strong>
-                      </div>
-
-                      {p.product_available ? (
-                        <Button radius="sm" color="success" variant="ghost">
-                          Agregar al carrito{" "}
-                          <ShoppingCartIcon className="h-4 w-4" />
-                        </Button>
-                      ) : (
-                        <Button
-                          isDisabled
-                          radius="sm"
-                          color="default"
-                          variant="ghost"
-                        >
-                          Agotado
-                        </Button>
-                      )}
-                    </div>
-                  </Link>
-                ))}
-              </Suspense>
-            </div>
-
-            <div className="hidden w-full flex-wrap items-center justify-center gap-7 2xl:flex ">
-              <Suspense fallback={<TopProductsSkeleton />}>
-                {topProducts.slice(0, productsToShow["lg"]).map((p: any) => (
-                  <Link
-                    key={p.product_id}
-                    href={`/store/product/${p.product_id}`}
-                    className="flex h-[35.5rem] w-[22rem] flex-col items-start justify-center overflow-hidden rounded-xl  border bg-[#0a0a0a] px-3 shadow-lg shadow-gray-700   "
-                  >
-                    <div className="  flex w-full items-center justify-center overflow-hidden px-2 py-2">
-                      <Image
-                        src={p.product_images.split(",")[0]}
-                        alt={p.product_name}
-                        className=" h-72  rounded-sm "
-                      />
-                    </div>
-                    <div className="flex w-full flex-col">
-                      <h6 className="font block truncate py-2 text-3xl font-semibold">
-                        {p.product_name}
-                      </h6>
-                      <div className="flex flex-col gap-0 pb-4 ">
-                        <p className="mb-3 line-clamp-2 text-xl text-neutral-300">
-                          {p.product_description}
-                        </p>
-                        <strong className="text-3xl">${p.product_price}</strong>
-                      </div>
-
-                      {p.product_available ? (
-                        <Button
-                          radius="sm"
-                          color="success"
-                          variant="ghost"
-                          className="h-14 text-2xl"
-                        >
-                          Agregar al carrito{" "}
-                          <ShoppingCartIcon className="h-6 w-6" />
-                        </Button>
-                      ) : (
-                        <Button
-                          isDisabled
-                          radius="sm"
-                          color="default"
-                          variant="ghost"
-                        >
-                          Agotado
-                        </Button>
-                      )}
-                    </div>
-                  </Link>
-                ))}
-              </Suspense>
-            </div>
+          <div className="h-[33rem] w-full overflow-hidden py-4">
+            <TopProducts />
           </div>
+        </div>
+        <div className="flex w-full items-center justify-center gap-6">
+          {timesSkeleton.slice(0, 4).map((i) => (
+            <Card
+              key={i}
+              radius="lg"
+              className=" h-[32rem] w-[20.5rem] space-y-4 bg-neutral-900 py-4 md:h-[28rem] md:w-[19rem]"
+            >
+              <Skeleton
+                classNames={{
+                  base: "bg-neutral-700",
+                }}
+                className="mx-10 rounded-lg"
+              >
+                <div className=" h-64 rounded-lg bg-default-700"></div>
+              </Skeleton>
+              <Skeleton
+                classNames={{
+                  base: "bg-neutral-700",
+                }}
+                className="mx-2 rounded-lg"
+              >
+                <div className=" h-10  rounded-lg"></div>
+              </Skeleton>
+              <div className="space-y-2">
+                <div className="space-y-1">
+                  <Skeleton
+                    classNames={{
+                      base: "bg-neutral-700",
+                    }}
+                    className="mx-2 rounded-lg"
+                  >
+                    <div className=" h-4 rounded-lg"></div>
+                  </Skeleton>
+                  <Skeleton
+                    classNames={{
+                      base: "bg-neutral-700",
+                    }}
+                    className="mx-2 rounded-lg"
+                  >
+                    <div className=" h-4 rounded-lg"></div>
+                  </Skeleton>
+                </div>
+                <Skeleton
+                  classNames={{
+                    base: "bg-neutral-700",
+                  }}
+                  className="mx-2 mr-52 rounded-lg"
+                >
+                  <div className="  h-8 w-20 rounded-lg"></div>
+                </Skeleton>
+              </div>
+            </Card>
+          ))}
         </div>
       </main>
       <h2 className="mb-4 pl-5 text-4xl font-normal text-white md:pt-10">
