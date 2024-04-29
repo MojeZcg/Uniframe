@@ -1,6 +1,5 @@
 import Carousel from "@/component/Carousel";
 import { Image, Divider, Card, Skeleton } from "@nextui-org/react";
-import PrincipalImageSkeleton from "@/component/skeletons/PrincipalImageSkeleton";
 import { Suspense } from "react";
 import { TopProducts } from "@/component/TopProducts";
 
@@ -11,8 +10,6 @@ export default async function Home() {
     "https://i.pinimg.com/originals/31/fc/ca/31fccad5a22690fda468df8cbabc14fe.jpg",
     "https://i.pinimg.com/originals/48/44/f6/4844f69f0d491706f946ef4d6418fdcd.jpg",
   ];
-
-  const timesSkeleton = [0, 1, 2, 3];
 
   return (
     <div>
@@ -43,63 +40,9 @@ export default async function Home() {
             MAS VENDIDOS
           </h3>
 
-          <div className="h-[33rem] w-full overflow-hidden py-4">
+          <div className="w-full overflow-hidden md:h-[29rem]">
             <TopProducts />
           </div>
-        </div>
-        <div className="flex w-full items-center justify-center gap-6">
-          {timesSkeleton.slice(0, 4).map((i) => (
-            <Card
-              key={i}
-              radius="lg"
-              className=" h-[32rem] w-[20.5rem] space-y-4 bg-neutral-900 py-4 md:h-[28rem] md:w-[19rem]"
-            >
-              <Skeleton
-                classNames={{
-                  base: "bg-neutral-700",
-                }}
-                className="mx-10 rounded-lg"
-              >
-                <div className=" h-64 rounded-lg bg-default-700"></div>
-              </Skeleton>
-              <Skeleton
-                classNames={{
-                  base: "bg-neutral-700",
-                }}
-                className="mx-2 rounded-lg"
-              >
-                <div className=" h-10  rounded-lg"></div>
-              </Skeleton>
-              <div className="space-y-2">
-                <div className="space-y-1">
-                  <Skeleton
-                    classNames={{
-                      base: "bg-neutral-700",
-                    }}
-                    className="mx-2 rounded-lg"
-                  >
-                    <div className=" h-4 rounded-lg"></div>
-                  </Skeleton>
-                  <Skeleton
-                    classNames={{
-                      base: "bg-neutral-700",
-                    }}
-                    className="mx-2 rounded-lg"
-                  >
-                    <div className=" h-4 rounded-lg"></div>
-                  </Skeleton>
-                </div>
-                <Skeleton
-                  classNames={{
-                    base: "bg-neutral-700",
-                  }}
-                  className="mx-2 mr-52 rounded-lg"
-                >
-                  <div className="  h-8 w-20 rounded-lg"></div>
-                </Skeleton>
-              </div>
-            </Card>
-          ))}
         </div>
       </main>
       <h2 className="mb-4 pl-5 text-4xl font-normal text-white md:pt-10">
@@ -110,15 +53,13 @@ export default async function Home() {
       </div>
       <section className="max-w-full  text-white">
         <div className="flex h-96 w-full items-center overflow-hidden bg-main-gradient  text-small ">
-          <Suspense fallback={<PrincipalImageSkeleton />}>
-            <div className="h-full  bg-black opacity-50 ">
-              <Image
-                src="/Products/materials.jpg"
-                alt="Collage image 1"
-                className="h-full rounded-none bg-gray-950 object-cover "
-              />
-            </div>
-          </Suspense>
+          <div className="h-full  bg-black opacity-50 ">
+            <Image
+              src="/Products/materials.jpg"
+              alt="Collage image 1"
+              className="h-full rounded-none object-cover "
+            />
+          </div>
           <Divider orientation="vertical" className="mx-0 bg-white pr-0.5" />
           <p className="min-w-[60%] max-w-[65%] px-10 text-4xl font-normal leading-normal">
             NUESTROS MARCOS, CONFECCIONADOS CON LOS MATERIALES MÁS FINOS Y
