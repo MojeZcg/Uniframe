@@ -1,20 +1,12 @@
 "use client";
+import ProductsSkeleton from "@/component/skeletons/ProductsSkeleton";
 import ImagesOfProduct from "@/component/store/ImagesOfProduct";
 import { ShoppingCartIcon } from "@heroicons/react/16/solid";
 import { Button, Divider, Link, Pagination, Slider } from "@nextui-org/react";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 
-type Product = {
-  product_id: number;
-  product_name: string;
-  product_price: string;
-  product_images: string;
-  product_available: boolean;
-  product_description: string;
-  product_view_count: number;
-  product_created_at: string;
-};
+import { Product } from "../../lib/types";
 
 export default function Store() {
   const [products, setProducts] = useState<Product[] | null>(null);
@@ -157,14 +149,14 @@ export default function Store() {
       </div>
       <div className=" w-[calc(100vw-18rem)]">
         <div className=" flex flex-wrap items-center justify-center gap-x-5 gap-y-4 bg-main-dark  ">
-          {loading && <div>Loading...</div>}
+          {loading && <ProductsSkeleton timesSkeleton={9} />}
           {products?.map((p: Product) => (
             <NextLink
               key={p.product_id}
               href={`http://localhost:3000/${p.product_id}`}
               className="z-0 mb-4 w-[19rem] overflow-hidden rounded-lg border-2 border-white "
             >
-              <div className=" z-50 ml-auto mr-auto mt-4 h-[19rem] w-[13rem] overflow-visible">
+              <div className=" z-50 my-2 ml-auto mr-auto mt-4 h-[17rem] w-[13rem] overflow-visible">
                 <ImagesOfProduct
                   images={p.product_images}
                   name={p.product_name}
@@ -180,15 +172,28 @@ export default function Store() {
                   <strong className="text-xl font-bold">
                     {p.product_price} $
                   </strong>
-                  <Button
-                    size="md"
-                    radius="sm"
-                    color="success"
-                    variant="ghost"
-                    className=" ring-transparent"
-                  >
-                    Agregar <ShoppingCartIcon className="h-4 w-4" />
-                  </Button>
+                  {p.product_availables != 0 ? (
+                    <Button
+                      size="md"
+                      radius="sm"
+                      color="success"
+                      variant="ghost"
+                      className=" ring-transparent"
+                    >
+                      Agregar <ShoppingCartIcon className="h-4 w-4" />
+                    </Button>
+                  ) : (
+                    <Button
+                      isDisabled
+                      size="md"
+                      radius="sm"
+                      color="default"
+                      variant="ghost"
+                      className=" text-white ring-transparent"
+                    >
+                      Sold out
+                    </Button>
+                  )}
                 </div>
               </div>
             </NextLink>

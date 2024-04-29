@@ -7,17 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 import { Button, Image } from "@nextui-org/react";
 import Link from "next/link";
-
-type Product = {
-  product_id: number;
-  product_name: string;
-  product_price: string;
-  product_images: string;
-  product_available: boolean;
-  product_description: string;
-  product_view_count: number;
-  product_created_at: string;
-};
+import { Product } from "@/lib/types";
 
 const MobileSlider = ({ products }: { products: Product[] | null }) => {
   const settings = {
@@ -38,7 +28,7 @@ const MobileSlider = ({ products }: { products: Product[] | null }) => {
         <Link
           key={p.product_id}
           href={`/store/product/${p.product_id}`}
-          className="flex  h-[29rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-xl  border bg-[#0a0a0a] p-3  "
+          className="flex h-[29rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-xl  border bg-[#0a0a0a] p-3  "
         >
           <div className="  flex w-full items-center justify-center overflow-hidden px-2 py-2">
             <Image
@@ -58,17 +48,12 @@ const MobileSlider = ({ products }: { products: Product[] | null }) => {
               <strong className="text-2xl">${p.product_price}</strong>
             </div>
 
-            {p.product_available ? (
+            {p.product_availables != 0 ? (
               <Button radius="sm" color="success" variant="ghost" className="">
                 Agregar al carrito <ShoppingCartIcon className="h-5 w-5" />
               </Button>
             ) : (
-              <Button
-                isDisabled={true}
-                radius="sm"
-                color="default"
-                variant="ghost"
-              >
+              <Button isDisabled radius="sm" color="default" variant="ghost">
                 Agotado
               </Button>
             )}

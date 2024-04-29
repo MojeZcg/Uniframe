@@ -1,22 +1,13 @@
 "use client";
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
-import { Button, Card, Skeleton } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MobileSlider from "./MobileSlider";
 import ImagesOfProduct from "./store/ImagesOfProduct";
-
-type Product = {
-  product_id: number;
-  product_name: string;
-  product_price: string;
-  product_images: string;
-  product_available: boolean;
-  product_description: string;
-  product_view_count: number;
-  product_created_at: string;
-};
+import ProductsSkeleton from "./skeletons/ProductsSkeleton";
+import { Product } from "@/lib/types";
 
 export function TopProducts() {
   const [topProducts, setTopProducts] = useState<Product[] | null>(null);
@@ -42,21 +33,22 @@ export function TopProducts() {
   }, []);
 
   return (
-    <div className=" md:py-8">
+    <>
+      {loading && <ProductsSkeleton timesSkeleton={3} />}
       <div className="flex w-full items-center justify-center">
         <div className="block h-[32rem] w-[20.5rem] overflow-hidden py-6 md:hidden">
           <MobileSlider products={topProducts} />
         </div>
       </div>
 
-      <div className="hidden h-[10rem] flex-wrap items-center justify-center gap-6 overflow-hidden md:flex ">
+      <div className="hidden flex-wrap items-center justify-center gap-6 overflow-hidden md:flex ">
         {topProducts?.map((p: Product) => (
           <Link
             key={p.product_id}
             href={`/store/product/${p.product_id}`}
-            className="flex h-[24rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-xl  border bg-[#0a0a0a] p-3 shadow-lg shadow-gray-700  "
+            className="flex h-[22rem] w-[19rem] flex-col items-start justify-center overflow-hidden rounded-xl  border bg-[#0a0a0a] p-3 shadow-lg shadow-gray-700  "
           >
-            <div className=" z-50 ml-auto mr-auto  h-[17rem] w-[13rem] overflow-visible">
+            <div className=" z-50 ml-auto mr-auto h-[18rem] w-[13rem] overflow-visible">
               <ImagesOfProduct
                 images={p.product_images}
                 name={p.product_name}
@@ -73,7 +65,7 @@ export function TopProducts() {
                 <strong className="text-2xl">${p.product_price}</strong>
               </div>
 
-              {p.product_available ? (
+              {p.product_availables != 0 ? (
                 <Button radius="sm" color="success" variant="ghost">
                   Agregar al carrito <ShoppingCartIcon className="h-4 w-4" />
                 </Button>
@@ -86,6 +78,6 @@ export function TopProducts() {
           </Link>
         ))}
       </div>
-    </div>
+    </>
   );
 }
