@@ -26,7 +26,7 @@ export default function ImagesOfProduct({
             <Image
               src={url}
               alt={name + " product image n°" + i}
-              className=" h-72 rounded-none object-fill"
+              className=" h-64 rounded-none object-fill"
             />
           </div>
         ))}

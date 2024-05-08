@@ -17,8 +17,8 @@ export default async function Home() {
         <div className=" flex h-[calc(100vh)] flex-col items-start md:h-[calc(100vh-4.8rem)] md:flex-row md:justify-center 2xl:h-[calc(100vh-10rem)] ">
           <div className="z-30 flex h-[calc(100vh)] w-full flex-col items-center justify-center overflow-hidden bg-main-dark text-white md:h-[calc(100vh-4.8rem)] md:flex-row 2xl:h-[calc(100vh-13rem)]">
             <div className="z-20 flex h-[calc(100vh-30rem)] items-start justify-center border-b-1 border-white bg-main-dark  shadow-2xl shadow-black md:h-[calc(100vh-4.8rem)] md:w-[33.5rem]  2xl:h-[calc(100vh-13rem)] 2xl:w-[46rem]">
-              <div className=" flex w-full flex-col items-start justify-center bg-main-dark px-8 text-start md:w-72 md:p-0 2xl:w-[26rem] 2xl:pt-6">
-                <h3 className=" py-8 text-5xl font-extrabold leading-[3.1rem] text-neutral-200 md:pb-8 md:pt-10 md:text-5xl 2xl:py-9 2xl:text-6xl 2xl:font-black 2xl:leading-[4.5rem]">
+              <div className=" flex w-full flex-col items-start justify-center bg-main-dark  text-start md:w-[19rem] md:p-0 2xl:w-[26rem] 2xl:pt-6">
+                <h3 className=" py-8 text-5xl font-extrabold leading-[3.1rem] text-neutral-200 md:pb-8 md:pt-14 md:text-[3.3rem] 2xl:py-9 2xl:text-6xl 2xl:font-black 2xl:leading-[4.5rem]">
                   Bienvenido a Uniframe!
                 </h3>
                 <p className=" text-2xl font-medium leading-tight text-neutral-500 md:text-[1.9rem] 2xl:text-[3rem] 2xl:leading-[1.15] ">
@@ -40,7 +40,7 @@ export default async function Home() {
             MAS VENDIDOS
           </h3>
 
-          <div className="w-full overflow-hidden md:h-[29rem]">
+          <div className=" h-[30rem] overflow-hidden">
             <TopProducts />
           </div>
         </div>

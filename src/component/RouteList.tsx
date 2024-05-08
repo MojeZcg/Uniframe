@@ -1,5 +1,5 @@
 "use client";
-import { ShoppingCartIcon, Bars3Icon } from "@heroicons/react/20/solid";
+import { Bars3Icon, ShoppingCartIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -14,7 +14,7 @@ export default function RouteList() {
   ];
 
   return (
-    <ul className="flex gap-6 px-4 2xl:gap-12">
+    <ul className=" flex gap-6 px-4 text-lg font-medium md:pl-0 xl:gap-6 2xl:gap-12 2xl:text-2xl ">
       <li className="flex w-full items-center gap-6 pl-24 md:hidden md:w-auto ">
         <ShoppingCartIcon className="h-7 w-7" />
         <Bars3Icon className="h-9 w-9" />

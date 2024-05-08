@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -37,7 +36,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
       {images.map((src, i) => (
         <div
           key={src}
-          className="flex items-center justify-center border-y-[1px] border-black"
+          className=" flex items-center justify-center rounded-none border-y-[1px] border-black"
         >
           <Image
             src={src}
