@@ -6,7 +6,7 @@ export async function GET() {
     orderBy: {
       product_view_count: "desc",
     },
-    take: 6,
+    take: 4,
   });
   return NextResponse.json(topProducts);
 }
