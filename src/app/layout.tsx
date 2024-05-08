@@ -9,11 +9,10 @@ import Image from "next/image";
 import { ArrowUpRightIcon } from "@heroicons/react/16/solid";
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 
-import { FaInstagram, FaWhatsapp, FaFacebook } from "react-icons/fa";
-
 import RouteList from "@/component/RouteList";
 import Search from "@/component/layout/Search";
 import { NextUIProvider } from "@nextui-org/react";
+import { Routes, Socials } from "@/lib/data";
 
 const font = Inter({
   subsets: ["latin"],
@@ -25,32 +24,12 @@ export const metadata: Metadata = {
   description: "Empresa de cuadros nacida en Mendoza, Argentina",
 };
 
-const WHATSAPP_URL =
-  "https://wa.me/542614995742?text=Hola%21%2C%20estoy%20interesado%20en%20los%20productos%20que%20ofrece%20Uniframe.%20%C2%BFPodr%C3%ADan%20proporcionarme%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20productos%3F";
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const isMenuOpen = false;
-
-  const routes = [
-    { name: "Inicio", path: "/" },
-    { name: "Tienda", path: "/store" },
-    { name: "Contactanos", path: "/contact" },
-    { name: "Nosotros", path: "/about" },
-  ];
-
-  const socials = [
-    { name: "Whatsapp", path: WHATSAPP_URL, icon: FaWhatsapp },
-    { name: "Facebook", path: "https://www.facebook.com", icon: FaFacebook },
-    {
-      name: "Instagram",
-      path: "https://www.instagram.com/unifoto.digital/",
-      icon: FaInstagram,
-    },
-  ];
 
   return (
     <html lang="es">
@@ -125,11 +104,13 @@ export default function RootLayout({
                 >
                   CONTACTANOS
                 </Link>
-                {socials.map((route) => (
+                {Socials.map((route) => (
                   <li key={route.name} className="flex items-center gap-1.5 ">
                     <route.icon className="h-5 w-5 pr-1" />
                     <div className="flex items-center gap-1 transition-all duration-200 ease-in-out hover:pl-2">
-                      <Link href={route.path}>{route.name}</Link>
+                      <Link target="_blank" href={route.link}>
+                        {route.name}
+                      </Link>
                       <ArrowUpRightIcon className="h-3 w-3" />
                     </div>
                   </li>
@@ -142,7 +123,7 @@ export default function RootLayout({
                 >
                   UNIFRAME
                 </Link>
-                {routes.map((route) => (
+                {Routes.map((route) => (
                   <li
                     key={route.name}
                     className="flex items-center gap-2 transition-all duration-100 ease-in-out  hover:pl-1.5"

@@ -1,92 +1,136 @@
-import { Divider } from "@nextui-org/react";
+import { Socials } from "@/lib/data";
+import { Button, Divider, Input, Textarea } from "@nextui-org/react";
 import Link from "next/link";
 
-import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import { IoMailOutline, IoCallOutline } from "react-icons/io5";
+import { IoIosSend } from "react-icons/io";
 
 export default function Home() {
+  const fields = [
+    {
+      id: 1,
+      label: "Nombre Completo",
+      place: "Maria Ana González",
+      type: "text",
+      isrequired: true,
+    },
+    {
+      id: 2,
+      label: "Correo Electronico",
+      place: "contacto@example.com",
+      type: "email",
+      isrequired: true,
+    },
+  ];
+
   return (
-    <div className="bg-main-dark py-6">
-      <div className=" grid max-w-full items-center gap-32 rounded-md px-20 py-24 text-[#333] sm:grid-cols-2">
+    <div className="bg-main-dark">
+      <div className=" grid max-w-full items-center gap-32 rounded-sm px-20 py-16 text-[#333] sm:grid-cols-2">
         <div>
           <h1 className="flex items-center text-6xl font-extrabold text-neutral-50">
             Hablemos <IoCallOutline className=" ml-4 h-14 w-14" />
           </h1>
           <p className="mt-3 text-sm text-gray-400">
-            Have some big idea or brand to develop and need help? Then reach out
-            we&apos;d love to hear about your project and provide help.
+            ¡Nos encantaría saber de ti! ¿Tienes alguna pregunta, sugerencia o
+            simplemente quieres charlar sobre arte? No dudes en ponerte en
+            contacto con nosotros. Estamos aquí para ayudarte. Envíanos un
+            correo electrónico a{" "}
+            <Link href="mailto:info@uniframe.com" className="text-blue-400 ">
+              info@uniframe.com
+            </Link>{" "}
+            o llámanos al{" "}
+            <Link href="tel:+542614995742" className="text-blue-400 ">
+              +542614995742
+            </Link>
+            . También puedes visitarnos en nuestra sucursal en [dirección],
+            ¡Esperamos verte pronto!
           </p>
-          <div className="mt-12">
-            <h2 className="text-lg font-extrabold text-neutral-50">Email</h2>
+          <div className="mt-6">
+            <h2 className="text-2xl font-extrabold text-neutral-50">Email</h2>
             <ul className="mt-3">
               <li className="flex items-center">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-300">
-                  <IoMailOutline className="h-6 w-6" />
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-neutral-200">
+                  <IoMailOutline className="h-10 w-10 text-black" />
                 </div>
-                <a
-                  target="blank"
-                  href="https://veilmail.io/e/FkKh7o"
-                  className="ml-3 text-sm text-slate-400"
+                <Link
+                  target="_blank"
+                  href="mailto:Uniframe@gmail.com"
+                  className="pl-3"
                 >
-                  <small className="block">Mail</small>
-                  <strong>https://veilmail.io/e/FkKh7o</strong>
-                </a>
+                  <strong className=" text-base text-white">
+                    Nuestro Email
+                    <br />
+                    Uniframe@gmail.com
+                  </strong>
+                </Link>
               </li>
             </ul>
           </div>
           <div className="mt-12">
-            <h2 className="text-lg font-extrabold text-neutral-50">Socials</h2>
+            <h2 className="text-2xl font-extrabold text-neutral-50">Socials</h2>
             <ul className="mt-3 flex space-x-4">
-              <li className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e6e6e6cf]">
-                <Link href="">
-                  <FaFacebookF className="h-5 w-5" />
-                </Link>
-              </li>
-              <li className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e6e6e6cf]">
-                <Link href="">
-                  <FaLinkedinIn className="h-5 w-5" />
-                </Link>
-              </li>
-              <li className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e6e6e6cf]">
-                <Link href="https://www.instagram.com/unifoto.digital/">
-                  <FaInstagram className="h-5 w-5" />
-                </Link>
-              </li>
+              {Socials.map((social) => (
+                <li
+                  key={social.id}
+                  aria-label={social.name}
+                  className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-neutral-200"
+                >
+                  <Link target="_blank" href={social.link}>
+                    <social.icon className="h-8 w-8 text-black" />
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        <form className="ml-auo space-y-4">
-          <input
-            type="text"
-            placeholder="Name"
-            className="w-full rounded-md border bg-neutral-900 px-4 py-2.5 text-sm text-white outline-slate-500"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full rounded-md border bg-neutral-900 px-4 py-2.5 text-sm text-white outline-slate-500"
-          />
-          <input
-            type="text"
-            placeholder="Subject"
-            className="w-full rounded-md border bg-neutral-900 px-4 py-2.5 text-sm text-white outline-slate-500"
-          />
-          <textarea
-            placeholder="Message"
-            rows={6}
-            className="w-full rounded-md border bg-neutral-900 px-4 pt-2.5 text-sm text-white outline-slate-500"
-          ></textarea>
-          <button
-            type="button"
-            className="w-full rounded-md bg-neutral-800 px-4 py-2.5 text-sm font-semibold text-black transition-colors duration-250 ease-in-out hover:bg-slate-200"
+        <form className="ml-auto w-full space-y-6">
+          <div className="space-y-4">
+            {fields.map((field) => (
+              <Input
+                isRequired
+                key={field.id}
+                type={field.type}
+                size="lg"
+                color="primary"
+                label={field.label}
+                variant="bordered"
+                placeholder={field.place}
+                classNames={{
+                  label: ["text-[1.1rem]", ""],
+                  input: ["text-base"],
+                }}
+                className=" w-full  text-lg text-white "
+              />
+            ))}
+
+            <Textarea
+              isRequired
+              color="primary"
+              label="Mensaje"
+              variant="bordered"
+              placeholder="Escribe tu mensaje aquí"
+              classNames={{
+                label: ["text-[1.1rem]"],
+                input: "resize-y min-h-[7rem]",
+              }}
+              className="w-full text-lg text-white"
+            />
+          </div>
+
+          <Button
+            type="submit"
+            variant="bordered"
+            color="primary"
+            className="h-12 w-full text-lg font-semibold text-white transition-colors duration-250 ease-in-out"
           >
-            Send
-          </button>
+            Enviar
+            <IoIosSend className="h-5 w-5" />
+          </Button>
         </form>
       </div>
-      <div className="py-6 md:hidden">
-        <Divider className=" w-full bg-white " />
+      <div className=" z-50 px-6 py-4">
+        <Divider className=" h-0.5 bg-white" />
       </div>
     </div>
   );
