@@ -22,7 +22,7 @@ export default function RouteList() {
       {routes.map((route) => (
         <li
           key={route.name}
-          className={` hidden items-center md:flex  ${route.current && " underline decoration-black decoration-2 underline-offset-4"}`}
+          className={` hidden items-center text-black md:flex  ${route.current && " underline decoration-black decoration-2 underline-offset-4"}`}
         >
           <Link href={route.path}>{route.name}</Link>
         </li>

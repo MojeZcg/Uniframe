@@ -1,83 +1,77 @@
-import Carousel from "@/component/Carousel";
-import { Image, Divider, Card, Skeleton } from "@nextui-org/react";
-import { Suspense } from "react";
-import { TopProducts } from "@/component/TopProducts";
+import Autoplay from "embla-carousel-autoplay";
+import { Separator } from "@/components/ui/separator";
+import { TopProducts } from "@/components/TopProducts";
+import Image from "next/image";
+import Carousel from "@/components/Carousel";
 
 export default async function Home() {
-  const images = [
-    "https://i0.wp.com/www.hannahinthehouse.com/wp-content/uploads/2018/04/bed11copy.jpg?resize=1080%2C1627",
-    "https://i.pinimg.com/originals/ed/99/75/ed9975a56d44f1b9728b893695214bde.jpg",
-    "https://i.pinimg.com/originals/31/fc/ca/31fccad5a22690fda468df8cbabc14fe.jpg",
-    "https://i.pinimg.com/originals/48/44/f6/4844f69f0d491706f946ef4d6418fdcd.jpg",
-  ];
-
   return (
-    <div>
-      <main className=" text-white  ">
-        <div className=" flex h-[calc(100vh)] flex-col items-start md:h-[calc(100vh-4.8rem)] md:flex-row md:justify-center 2xl:h-[calc(100vh-10rem)] ">
-          <div className="z-30 flex h-[calc(100vh)] w-full flex-col items-center justify-center overflow-hidden bg-main-dark text-white md:h-[calc(100vh-4.8rem)] md:flex-row 2xl:h-[calc(100vh-13rem)]">
-            <div className="z-20 flex h-[calc(100vh-30rem)] items-start justify-center border-b-1 border-white bg-main-dark  shadow-2xl shadow-black md:h-[calc(100vh-4.8rem)] md:w-[33.5rem]  2xl:h-[calc(100vh-13rem)] 2xl:w-[46rem]">
-              <div className=" flex w-full flex-col items-start justify-center bg-main-dark  text-start md:w-[19rem] md:p-0 2xl:w-[26rem] 2xl:pt-6">
-                <h3 className=" py-8 text-5xl font-extrabold leading-[3.1rem] text-neutral-200 md:pb-8 md:pt-14 md:text-[3.3rem] 2xl:py-9 2xl:text-6xl 2xl:font-black 2xl:leading-[4.5rem]">
-                  Bienvenido a Uniframe!
-                </h3>
-                <p className=" text-2xl font-medium leading-tight text-neutral-500 md:text-[1.9rem] 2xl:text-[3rem] 2xl:leading-[1.15] ">
-                  Encuentra tu inspiración en cada obra. Explora nuestra
-                  exclusiva colección de cuadros y transforma tu espacio con
-                  arte excepcional.
-                </p>
-              </div>
-            </div>
-            <div className=" w-full cursor-default select-none overflow-hidden border-b-1 border-white xl:h-[calc(100vh-4.8rem)] 2xl:h-[calc(100vh-13rem)]">
-              <Carousel images={images} />
+    <main>
+      <div className=" flex h-[calc(100vh)] flex-col items-start md:h-[calc(100vh-4.8rem)] md:flex-row md:justify-center 2xl:h-[calc(100vh-10rem)] ">
+        <div className="bg-main-dark z-30 flex h-[calc(100vh)] w-full flex-col items-center justify-center overflow-hidden  md:h-[calc(100vh-4.8rem)] md:flex-row 2xl:h-[calc(100vh-13rem)]">
+          <div className="border-b-1 bg-main-dark z-20 flex h-[calc(100vh-30rem)] items-start justify-center border-white  shadow-2xl shadow-black md:h-[calc(100vh-4.8rem)] md:w-[33.5rem]  2xl:h-[calc(100vh-13rem)] 2xl:w-[46rem]">
+            <div className=" bg-main-dark flex w-full flex-col items-start justify-center  text-start md:w-[19rem] md:p-0 2xl:w-[26rem] 2xl:pt-6">
+              <h3 className=" py-8 text-5xl font-extrabold leading-[3.1rem]  md:pb-8 md:pt-14 md:text-[3.3rem] 2xl:py-9 2xl:text-6xl 2xl:font-black 2xl:leading-[4.5rem]">
+                Bienvenido a Uniframe!
+              </h3>
+              <p className=" text-2xl font-medium leading-tight text-neutral-500 md:text-[1.9rem] 2xl:text-[3rem] 2xl:leading-[1.15] ">
+                Encuentra tu inspiración en cada obra. Explora nuestra exclusiva
+                colección de cuadros y transforma tu espacio con arte
+                excepcional.
+              </p>
             </div>
           </div>
-        </div>
-
-        <div className="flex w-full flex-col items-center justify-center ">
-          <h3 className=" mb-4 mt-10 px-10 text-center text-2xl font-medium text-[#bfbfbf] underline underline-offset-[6px] md:text-4xl 2xl:mb-8 2xl:mt-16 2xl:text-5xl">
-            NUESTROS <span className=" font-bold text-white">PRODUCTOS</span>{" "}
-            MAS VENDIDOS
-          </h3>
-
-          <div className=" h-[30rem] overflow-hidden">
-            <TopProducts />
+          <div className=" border-b-1 w-full cursor-default select-none overflow-hidden border-white xl:h-[calc(100vh-4.8rem)] 2xl:h-[calc(100vh-13rem)]">
+            <Carousel />
           </div>
         </div>
-      </main>
-      <h2 className="mb-4 pl-5 text-4xl font-normal text-white md:pt-10">
+      </div>
+
+      <div className="flex w-full flex-col items-center justify-center ">
+        <h3 className=" mb-4 mt-10 px-10 text-center text-2xl font-medium text-[#bfbfbf] underline underline-offset-[6px] md:text-4xl 2xl:mb-8 2xl:mt-16 2xl:text-5xl">
+          NUESTROS <span className=" font-bold text-white">PRODUCTOS</span> MAS
+          VENDIDOS
+        </h3>
+
+        <TopProducts />
+      </div>
+      <h2 className="mb-4 pl-5 text-4xl font-normal text-white md:pt-4">
         PROCESO DE ELABORACIÓN
       </h2>
       <div className="flex w-full items-center justify-center  ">
-        <Divider className="w-full bg-white pt-0.5" />
+        <Separator className="w-full bg-white pt-0.5" />
       </div>
       <section className="max-w-full  text-white">
-        <div className="flex h-96 w-full items-center overflow-hidden bg-main-gradient  text-small ">
+        <div className="bg-main-gradient text-small flex h-96 w-full items-center  overflow-hidden ">
           <div className="h-full  bg-black opacity-50 ">
             <Image
               src="/Products/materials.jpg"
               alt="Collage image 1"
+              width={1200}
+              height={400}
               className="h-full rounded-none object-cover "
             />
           </div>
-          <Divider orientation="vertical" className="mx-0 bg-white pr-0.5" />
+          <Separator orientation="vertical" className="mx-0 bg-white pr-0.5" />
           <p className="min-w-[60%] max-w-[65%] px-10 text-4xl font-normal leading-normal">
             NUESTROS MARCOS, CONFECCIONADOS CON LOS MATERIALES MÁS FINOS Y
             DURADEROS, SON EL EPÍTOME DE LA CALIDAD Y EL BUEN GUSTO.
           </p>
         </div>
         <div className="flex w-full items-center  justify-center  ">
-          <Divider className="w-full bg-white pt-0.5" />
+          <Separator className="w-full bg-white pt-0.5" />
         </div>
         <div className=" flex h-screen w-full items-center justify-center overflow-hidden ">
           <div className="absolute z-30 h-screen w-full bg-black opacity-60"></div>
           <Image
             src="/wall.jpg"
             alt="Collage image 2"
+            width={1920}
+            height={1000}
             className=" z-10 w-full rounded-none  object-cover"
           />
         </div>
       </section>
-    </div>
+    </main>
   );
 }
