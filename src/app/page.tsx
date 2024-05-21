@@ -1,4 +1,3 @@
-import Autoplay from "embla-carousel-autoplay";
 import { Separator } from "@/components/ui/separator";
 import { TopProducts } from "@/components/TopProducts";
 import Image from "next/image";
