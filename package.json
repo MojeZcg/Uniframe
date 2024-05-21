@@ -57,7 +57,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.4"
   },
-  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "description": "The Official Site of the frameseller Uniframe. Created in Nextjs and Typescript",
   "main": "postcss.config.js",
   "keywords": [],
   "author": "Walter Jesús Montenegro",
