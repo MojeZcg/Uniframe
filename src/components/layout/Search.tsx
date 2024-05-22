@@ -39,17 +39,11 @@ export default function Search({
         onBlur={() => setFocus(false)}
         defaultValue={searchParams.get("q")?.toString()}
         placeholder={placeholder}
-        className=" z-50 h-full w-full rounded-lg border border-neutral-900 bg-white px-3 py-2 text-base font-normal 2xl:text-2xl"
+        className=" z-50 h-full w-full rounded-lg bg-white px-3 py-2 text-base font-normal text-black 2xl:text-2xl "
       />
-      {pathname == "store" ? (
-        <button type="submit" className="fixed z-50 px-3 ">
-          {focus && <MagnifyingGlassIcon className=" h-6 w-6" />}
-        </button>
-      ) : (
-        <button type="submit" className="fixed z-50 px-3 ">
-          <MagnifyingGlassIcon className=" h-6 w-6" />
-        </button>
-      )}
+      <button type="submit" className="fixed z-50 px-3 text-black">
+        {focus && <MagnifyingGlassIcon className=" h-6 w-6" />}
+      </button>
     </form>
   );
 }
