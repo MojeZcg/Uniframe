@@ -1,6 +1,7 @@
 import "./globals.css";
 import * as React from "react";
 
+import { Routes, Socials } from "@/lib/data";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
@@ -10,8 +11,13 @@ import { ArrowUpRightIcon } from "@heroicons/react/16/solid";
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 
 import RouteList from "@/components/RouteList";
-import Search from "@/components/layout/Search";
-import { Routes, Socials } from "@/lib/data";
+import LayoutSearch from "@/components/layout/LayoutSearch";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 
 const font = Inter({
   subsets: ["latin"],
@@ -72,9 +78,26 @@ export default function RootLayout({
                 <RouteList />
               </div>
             </div>
-            <div className="hidden w-[40%] items-center justify-end gap-8 pr-16 md:flex xl:w-[52%] xl:pl-5 2xl:w-6/12">
-              <Search placeholder="Busca productos, materiales y más..." />
-              <ShoppingCartIcon className="h-6 w-6 text-black 2xl:h-9 2xl:w-9" />
+            <div className="hidden w-[40%] items-center justify-end gap-0 pr-10 md:flex xl:w-[52%] xl:pl-5 2xl:w-6/12">
+              <LayoutSearch />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button>
+                    <div>
+                      <strong className="mr-2 text-base">Carrito</strong>
+                      <h4 className="text-xs">$300</h4>
+                    </div>
+                    <ShoppingCartIcon className="h-7 w-7 text-black 2xl:h-9 2xl:w-9" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="mr-10 w-80 rounded-lg border border-neutral-400 bg-neutral-200 text-black">
+                  <div className="grid gap-4">
+                    <div className="space-y-2">
+                      <h4 className="font-medium leading-none">Carrito</h4>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
 
