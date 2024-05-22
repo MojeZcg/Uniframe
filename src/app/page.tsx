@@ -20,7 +20,7 @@ export default async function Home() {
               </p>
             </div>
           </div>
-          <div className=" border-b-1 w-full cursor-default select-none overflow-hidden border-white xl:h-[calc(100vh-4.8rem)] 2xl:h-[calc(100vh-13rem)]">
+          <div className="w-full cursor-default select-none xl:h-[calc(100vh-4.8rem)] 2xl:h-[calc(100vh-13rem)]">
             <Carousel />
           </div>
         </div>
