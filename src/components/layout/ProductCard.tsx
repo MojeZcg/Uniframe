@@ -27,7 +27,7 @@ export default function ProductCard({
   return (
     <Card
       key={product.product_id}
-      className=" flex h-[30rem] max-h-[30rem] max-w-[20rem] flex-col items-start justify-center overflow-hidden rounded-xl border bg-neutral-950 px-4 py-2 text-white  shadow-md shadow-gray-700 "
+      className=" flex h-[30rem] max-h-[30rem] max-w-[20rem] flex-col items-start justify-center overflow-hidden rounded-xl border border-neutral-400 bg-transparent px-4 py-2 text-white  shadow-md shadow-gray-700 "
     >
       <div className="z-50 flex w-full ">
         <div className=" mb-2 ml-auto mr-auto h-[17rem] max-h-[17rem] w-[12rem]">
