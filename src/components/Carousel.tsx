@@ -1,40 +1,46 @@
 "use client";
+import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
+import Autoplay from "embla-carousel-autoplay";
 
 export default function Component() {
   const images = [
-    "/Carousel/1.jpg",
-    "/Carousel/2.jpg",
-    "/Carousel/3.jpg",
-    "/Carousel/4.jpg",
+    { id: 1, path: "/Carousel/1.jpg" },
+    { id: 2, path: "/Carousel/2.jpg" },
+    { id: 3, path: "/Carousel/3.jpg" },
+    { id: 4, path: "/Carousel/4.jpg" },
   ];
-
   return (
-    <div className=" flex max-h-[calc(100vh-5rem)] w-full overflow-hidden">
-      <Carousel>
-        <CarouselContent>
-          {images.map((i) => (
-            <CarouselItem key={i} className="basic-1/2 ">
-              <Image
-                src={i}
-                alt=""
-                width={2000}
-                height={2000}
-                className=" object-fill"
-              />
-            </CarouselItem>
-          ))}
-          <CarouselPrevious />
-          <CarouselNext />
-        </CarouselContent>
-      </Carousel>
-    </div>
+    <Carousel
+      plugins={[
+        Autoplay({
+          delay: 3000,
+        }),
+      ]}
+      opts={{
+        align: "start",
+        loop: true,
+      }}
+    >
+      <CarouselContent>
+        {images.map((image) => (
+          <CarouselItem
+            key={image.id}
+            className="basic-1/2 mx-0 max-w-[50%] px-0"
+          >
+            <Image
+              src={image.path}
+              alt={"Path: " + image.path}
+              height={800}
+              width={600}
+            />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+    </Carousel>
   );
 }
