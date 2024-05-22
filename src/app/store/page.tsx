@@ -68,14 +68,12 @@ export default function Store() {
       </div>
 
       <div className=" flex h-auto w-full justify-between  ">
-        <div className="ml-3 w-[18rem] 2xl:w-[30rem]">
+        <div className="ml-3 w-[16rem] 2xl:w-[30rem]">
           <h3 className=" text-2xl ">Filtros</h3>
-          <Accordion type="single" className="w-full">
+          <Accordion type="multiple" className="w-full">
             <AccordionItem value="price">
               <AccordionTrigger>Precio</AccordionTrigger>
-              <AccordionContent>
-                Yes. It adheres to the WAI-ARIA design pattern.
-              </AccordionContent>
+              <AccordionContent></AccordionContent>
             </AccordionItem>
             <AccordionItem value="meterials">
               <AccordionTrigger>Materiales</AccordionTrigger>
@@ -95,7 +93,7 @@ export default function Store() {
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
-              <AccordionTrigger className="text-lg">Envio</AccordionTrigger>
+              <AccordionTrigger>Envio</AccordionTrigger>
               <AccordionContent>
                 <div className="flex items-center gap-1.5 py-1">
                   <div className="flex items-center gap-2">
@@ -111,8 +109,8 @@ export default function Store() {
           </Accordion>
         </div>
         <div className=" w-[calc(100vw-18rem)]">
-          <div className=" bg-main-dark flex flex-wrap items-center justify-center gap-x-4 gap-y-3  ">
-            {loading && <ProductsSkeleton timesSkeleton={9} />}
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3   ">
+            {loading && <ProductsSkeleton timesSkeleton={5} />}
             {products?.map((p: Product) => (
               <ProductCard key={p.product_id} product={p} />
             ))}
@@ -128,7 +126,7 @@ export default function Store() {
                     <PaginationLink href="#">1</PaginationLink>
                   </PaginationItem>
                   <PaginationItem>
-                    <PaginationLink href="#" isActive className="text-black">
+                    <PaginationLink href="#" isActive>
                       2
                     </PaginationLink>
                   </PaginationItem>
