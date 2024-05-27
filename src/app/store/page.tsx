@@ -15,6 +15,14 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useEffect, useState } from "react";
@@ -24,18 +32,51 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import Search from "@/components/layout/Search";
 import { FiPackage } from "react-icons/fi";
+import { ChevronDown } from "lucide-react";
+
+type PaginationType = {
+  currentPage: number;
+  PageSize: number;
+  totalCount: number;
+  totalPages: number;
+};
+
+type Filter = {
+  order: string;
+  order_name: string;
+  price: number[];
+  materials: string;
+};
 
 export default function Store() {
   const [products, setProducts] = useState<Product[] | null>(null);
+  const [pagination, setPagination] = useState<PaginationType>({
+    currentPage: 0,
+    PageSize: 0,
+    totalCount: 0,
+    totalPages: 0,
+  });
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [filters, setFilters] = useState<Filter>({
+    order: "none",
+    order_name: "Mas Relevantes",
+    price: [0, 50],
+    materials: "",
+  });
+
   const [loading, setLoading] = useState(false);
 
   const getProducts = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/api/products/");
+      const res = await fetch(
+        `http://localhost:3000/api/products?p=${currentPage}&o=${filters.order}`,
+      );
       if (res) {
         const data = await res.json();
-        if (data) setProducts(data);
+        if (data.products) setProducts(data.products);
+        if (data.pagination) setPagination(data.pagination);
       }
     } catch (error) {
       console.log(error);
@@ -46,7 +87,18 @@ export default function Store() {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [currentPage, filters]);
+
+  function createArray(size: number) {
+    const result = [];
+    for (let i = 1; i <= size; i++) {
+      const id = i;
+      result.push({ id });
+    }
+    return result;
+  }
+
+  const Pages = createArray(pagination.totalPages);
 
   const materials = [
     { id: 1, slug: "wood", name: "Madera" },
@@ -54,13 +106,53 @@ export default function Store() {
     { id: 3, slug: "steel", name: "Acero" },
   ];
 
+  const order = [
+    { id: "none", name: "Mas Relevantes" },
+    { id: "asc", name: "Menor Precio" },
+    { id: "desc", name: "Mayor Precio" },
+  ];
+
   return (
     <div>
       <div className="">
         <div className="flex items-center justify-between pt-4">
-          <h1 className="pl-6 text-3xl font-semibold">MARCOS</h1>
-          <div className="mr-4 w-[48%] text-black">
-            <Search placeholder="" />
+          <div className="flex w-1/2 items-center justify-between">
+            <h1 className="pl-6 text-3xl font-semibold ">MARCOS</h1>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Label
+                  htmlFor="Order Filter"
+                  className="flex items-center justify-center gap-0.5 text-sm"
+                >
+                  Ordenar
+                  <ChevronDown className="h-5 w-5" />
+                </Label>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-52">
+                <DropdownMenuLabel className="text-neutral-300">
+                  {filters.order_name}
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+
+                {order.map((ord) => (
+                  <DropdownMenuCheckboxItem
+                    key={ord.id}
+                    onClick={() =>
+                      setFilters({
+                        ...filters,
+                        order: ord.id,
+                        order_name: ord.name,
+                      })
+                    }
+                  >
+                    {ord.name}
+                  </DropdownMenuCheckboxItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <div className="w-[48%] pr-8 text-black">
+            <Search placeholder="Busca productos, materiales y más..." />
           </div>
         </div>
 
@@ -68,7 +160,7 @@ export default function Store() {
       </div>
 
       <div className=" flex h-auto w-full justify-between  ">
-        <div className="ml-3 w-[16rem] 2xl:w-[30rem]">
+        <div className="ml-3 w-[16rem] 2xl:w-[20rem]">
           <h3 className=" text-2xl ">Filtros</h3>
           <Accordion type="multiple" className="w-full">
             <AccordionItem value="price">
@@ -82,6 +174,9 @@ export default function Store() {
                   <div
                     key={material.id}
                     className="flex items-center gap-2 py-1.5"
+                    onClick={() =>
+                      setFilters({ ...filters, materials: material.slug })
+                    }
                   >
                     <Checkbox
                       id={material.slug}
@@ -108,9 +203,9 @@ export default function Store() {
             </AccordionItem>
           </Accordion>
         </div>
-        <div className=" w-[calc(100vw-18rem)]">
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3   ">
-            {loading && <ProductsSkeleton timesSkeleton={5} />}
+        <div className=" w-[calc(100vw-16rem)] 2xl:w-[calc(100vw-20rem)]">
+          <div className="flex flex-wrap items-center justify-start gap-x-4 gap-y-3 pl-10 2xl:pl-8   ">
+            {loading && <ProductsSkeleton timesSkeleton={6} />}
             {products?.map((p: Product) => (
               <ProductCard key={p.product_id} product={p} />
             ))}
@@ -120,24 +215,31 @@ export default function Store() {
               <Pagination>
                 <PaginationContent>
                   <PaginationItem>
-                    <PaginationPrevious href="#" />
+                    <PaginationPrevious
+                      href="#"
+                      onClick={() => setCurrentPage(currentPage - 1)}
+                    />
                   </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#" isActive>
-                      2
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">3</PaginationLink>
-                  </PaginationItem>
+                  {Pages.map((p) => (
+                    <PaginationItem key={p.id}>
+                      <PaginationLink
+                        href="#"
+                        onClick={() => setCurrentPage(p.id)}
+                        isActive={currentPage == p.id}
+                      >
+                        {p.id}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+
                   <PaginationItem>
                     <PaginationEllipsis />
                   </PaginationItem>
                   <PaginationItem>
-                    <PaginationNext href="#" />
+                    <PaginationNext
+                      href="#"
+                      onClick={() => setCurrentPage(currentPage + 1)}
+                    />
                   </PaginationItem>
                 </PaginationContent>
               </Pagination>
