@@ -23,19 +23,20 @@ model products {
   product_view_count  Int                 @default(0)
   product_created_at  DateTime            @default(now()) @db.Timestamp(0)
   product_purchases   product_purchases[]
+  product_materials   product_materials[]
 }
 
 model users {
   user_id           Int                 @id @default(autoincrement())
-  user_email        String              @unique(map: "user_email") @db.VarChar(70)
+  user_email        String              @unique @db.VarChar(70)
   user_name         String              @db.VarChar(60)
-  user_phone        String              @unique(map: "user_phone") @db.VarChar(20)
+  user_phone        String              @unique @db.VarChar(20)
   product_purchases product_purchases[]
 }
 
 model payment_methods {
   method_id         Int                 @id @default(autoincrement())
-  method_name       String              @unique(map: "method_name") @db.VarChar(60)
+  method_name       String              @unique @db.VarChar(60)
   product_purchases product_purchases[]
 }
 
@@ -46,17 +47,28 @@ model product_purchases {
   amount_sold          Decimal         @db.Decimal(10, 2)
   quantity_of_product  Int
   pay_method           String          @db.VarChar(70)
-  transaction_datetime DateTime        @default(dbgenerated("(now())")) @db.Timestamp(0)
-  users                users           @relation(fields: [buyer_user], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "product_purchases_ibfk_1")
-  products             products        @relation(fields: [product_sold], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "product_purchases_ibfk_2")
-  payment_methods      payment_methods @relation(fields: [pay_method], references: [method_name], onDelete: NoAction, onUpdate: NoAction, map: "product_purchases_ibfk_3")
+  transaction_datetime DateTime        @default(now()) @db.Timestamp(0)
+  users                users           @relation(fields: [buyer_user], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  products             products        @relation(fields: [product_sold], references: [product_id], onDelete: NoAction, onUpdate: NoAction)
+  payment_methods      payment_methods @relation(fields: [pay_method], references: [method_name], onDelete: NoAction, onUpdate: NoAction)
 
-  @@index([buyer_user], map: "buyer_user")
-  @@index([pay_method], map: "pay_method")
-  @@index([product_sold], map: "product_sold")
+  @@index([buyer_user])
+  @@index([pay_method])
+  @@index([product_sold])
 }
 
-model available_materials {
-  material_id   Int    @id @default(autoincrement())
-  material_name String @db.VarChar(70)
+model materials {
+  material_id       Int                 @id @default(autoincrement())
+  material_slug     String              @db.VarChar(70)
+  material_name     String              @db.VarChar(70)
+  product_materials product_materials[]
+}
+
+model product_materials {
+  product_id  Int
+  material_id Int
+  products    products  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  materials   materials @relation(fields: [material_id], references: [material_id], onDelete: Cascade)
+
+  @@id([product_id, material_id])
 }
