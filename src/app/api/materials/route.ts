@@ -3,21 +3,20 @@ import db from "@/lib/db";
 
 export async function GET() {
   try {
-    const topProducts = await db.products.findMany({
+    const materials = await db.materials.findMany({
       orderBy: {
-        product_view_count: "desc",
+        material_id: "desc",
       },
-      take: 4,
     });
 
-    return NextResponse.json(topProducts);
+    return NextResponse.json(materials);
   } catch (error) {
     console.error("Database query failed", error);
 
     return NextResponse.json(
       {
         error:
-          "An error occurred while fetching the top products. Please try again later.",
+          "An error occurred while fetching the materials. Please try again later.",
       },
       { status: 500 },
     );

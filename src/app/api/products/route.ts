@@ -1,39 +1,121 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import db from "@/lib/db";
 
-export async function GET(request: Request, pageN: number) {
-  const url = new URL(request.url);
+export async function GET(request: NextRequest) {
+  const url = request.nextUrl.searchParams;
 
-  const page = url.searchParams.get("p");
-  const order = url.searchParams.get("o");
+  const page = url.get("p");
+  const order = url.get("o");
+  const query = url.get("q");
+
+  if (typeof query !== "string" || !query.trim()) {
+    return NextResponse.json(
+      { error: "Invalid query parameter" },
+      { status: 400 },
+    );
+  }
+
+  let queryParam;
+  if (query === "none") {
+    queryParam = "";
+  } else {
+    queryParam = query;
+  }
 
   const pageNumber = page ? parseInt(page, 10) : 1;
-  const pageSize = 3;
+  if (isNaN(pageNumber) || pageNumber <= 0) {
+    return NextResponse.json({ error: "Invalid page number" }, { status: 400 });
+  }
+
+  const pageSize = 12;
   const skip = (pageNumber - 1) * pageSize;
 
-  const totalCount = await db.products.count();
-
-  const products = await db.products.findMany({
-    orderBy: order
-      ? {
-          product_price: order === "asc" ? "asc" : "desc",
-        }
-      : {
-          product_availables: "desc",
+  if (request.method === "GET") {
+    try {
+      const totalCount = await db.products.count({
+        where: {
+          OR: [
+            {
+              product_name: {
+                contains: queryParam,
+                mode: "insensitive",
+              },
+            },
+            {
+              product_description: {
+                contains: queryParam,
+                mode: "insensitive",
+              },
+            },
+          ],
         },
-    skip: skip,
-    take: pageSize,
-  });
+      });
 
-  const totalPages = Math.ceil(totalCount / pageSize);
+      const min = await db.products.aggregate({
+        _min: {
+          product_price: true,
+        },
+      });
 
-  return NextResponse.json({
-    products,
-    pagination: {
-      totalCount,
-      totalPages,
-      currentPage: pageNumber,
-      pageSize,
-    },
-  });
+      const max = await db.products.aggregate({
+        _max: {
+          product_price: true,
+        },
+      });
+
+      const products = await db.products.findMany({
+        orderBy: order
+          ? {
+              product_price: order === "asc" ? "asc" : "desc",
+            }
+          : {
+              product_availables: "desc",
+            },
+        where: {
+          OR: [
+            {
+              product_name: {
+                contains: queryParam,
+                mode: "insensitive",
+              },
+            },
+            {
+              product_description: {
+                contains: queryParam,
+                mode: "insensitive",
+              },
+            },
+          ],
+        },
+        skip: skip,
+        take: pageSize,
+      });
+
+      const totalPages = Math.ceil(totalCount / pageSize);
+
+      return NextResponse.json({
+        products,
+        min,
+        max,
+        pagination: {
+          totalCount,
+          totalPages,
+          currentPage: pageNumber,
+          pageSize,
+        },
+      });
+    } catch (error) {
+      console.error("Database query failed", error);
+
+      return NextResponse.json(
+        {
+          error:
+            "An error occurred while fetching products. Please try again later.",
+        },
+        { status: 500 },
+      );
+    }
+  }
+
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
 }
