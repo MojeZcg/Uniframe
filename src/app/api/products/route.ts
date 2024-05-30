@@ -7,6 +7,7 @@ export async function GET(request: NextRequest) {
   const page = url.get("p");
   const order = url.get("o");
   const query = url.get("q");
+  const price = url.get("price");
 
   if (typeof query !== "string" || !query.trim()) {
     return NextResponse.json(
@@ -32,21 +33,39 @@ export async function GET(request: NextRequest) {
 
   if (request.method === "GET") {
     try {
+      let priceFilter = {};
+      if (price) {
+        const [minPrice, maxPrice] = price.split(",").map(Number);
+        if (!isNaN(minPrice) && !isNaN(maxPrice)) {
+          priceFilter = {
+            product_price: {
+              gte: minPrice,
+              lte: maxPrice,
+            },
+          };
+        }
+      }
+
       const totalCount = await db.products.count({
         where: {
-          OR: [
+          AND: [
             {
-              product_name: {
-                contains: queryParam,
-                mode: "insensitive",
-              },
+              OR: [
+                {
+                  product_name: {
+                    contains: queryParam,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  product_description: {
+                    contains: queryParam,
+                    mode: "insensitive",
+                  },
+                },
+              ],
             },
-            {
-              product_description: {
-                contains: queryParam,
-                mode: "insensitive",
-              },
-            },
+            priceFilter,
           ],
         },
       });
@@ -72,19 +91,24 @@ export async function GET(request: NextRequest) {
               product_availables: "desc",
             },
         where: {
-          OR: [
+          AND: [
             {
-              product_name: {
-                contains: queryParam,
-                mode: "insensitive",
-              },
+              OR: [
+                {
+                  product_name: {
+                    contains: queryParam,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  product_description: {
+                    contains: queryParam,
+                    mode: "insensitive",
+                  },
+                },
+              ],
             },
-            {
-              product_description: {
-                contains: queryParam,
-                mode: "insensitive",
-              },
-            },
+            priceFilter,
           ],
         },
         skip: skip,
