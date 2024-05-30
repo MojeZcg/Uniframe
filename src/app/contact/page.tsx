@@ -95,21 +95,21 @@ export default function Home() {
                 key={field.id}
                 type={field.type}
                 placeholder={field.place}
-                className=" h-12 w-full text-base text-white"
+                className=" h-12 w-full rounded-lg border border-neutral-500  bg-neutral-900 text-base text-white"
               ></Input>
             ))}
 
             <Textarea
               required
               placeholder="Escribe tu mensaje aquí"
-              className="min-h-52 w-full text-base text-white"
+              className="min-h-52 w-full rounded-lg border border-neutral-500 bg-neutral-900 text-base text-white"
             />
           </div>
 
           <Button
             type="submit"
             variant="outline"
-            className="duration-250 h-12 w-full text-base font-semibold text-white transition-colors ease-in-out"
+            className="duration-250 h-12 w-full rounded-lg border border-neutral-300 bg-neutral-900 text-base font-semibold text-white transition-colors ease-in-out"
           >
             Enviar
             <IoIosSend className="ml-2 h-5 w-5" />
