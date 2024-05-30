@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { ShoppingCartIcon } from "@heroicons/react/16/solid";
 import Image from "next/image";
@@ -27,32 +27,28 @@ export default function ProductCard({
   return (
     <Card
       key={product.product_id}
-      className=" flex h-[30rem] max-h-[30rem] max-w-[20rem] flex-col items-start justify-center overflow-hidden rounded-xl border border-neutral-400 bg-transparent px-4 py-2 text-white  shadow-md shadow-gray-700 "
+      className=" flex h-[29rem] max-h-[29rem] max-w-[20rem] flex-col items-start justify-center overflow-hidden rounded-xl border border-neutral-400 bg-transparent px-4 pb-2 text-white  shadow-md shadow-gray-700 "
     >
-      <div className="z-50 flex w-full ">
-        <div className=" mb-2 ml-auto mr-auto h-[17rem] max-h-[17rem] w-[12rem]">
-          <Carousel>
-            <CarouselContent>
-              {images.map((image) => (
-                <CarouselItem key={image.id}>
-                  <AspectRatio
-                    ratio={2 / 3}
-                    className="flex h-full select-none items-center justify-center"
-                  >
-                    <Image
-                      src={image.src}
-                      alt={product.product_name + " Image - " + image.id}
-                      width={700}
-                      height={700}
-                    />
-                  </AspectRatio>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        </div>
+      <div className="z-50 ml-auto mr-auto flex h-[16.5rem] w-[13rem] items-center justify-center pt-1">
+        <Carousel>
+          <CarouselContent>
+            {images.map((image) => (
+              <CarouselItem key={image.id}>
+                <div className="flex  h-64 select-none items-center justify-center ">
+                  <Image
+                    src={image.src}
+                    alt={product.product_name + " Image - " + image.id}
+                    className=" object-contain"
+                    width={1200}
+                    height={1400}
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </div>
 
       <Link
