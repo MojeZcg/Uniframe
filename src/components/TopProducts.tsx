@@ -12,7 +12,9 @@ export function TopProducts() {
   const getProducts = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/api/products/top/");
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/products/top/`,
+      );
       if (res) {
         const data = await res.json();
         if (data) setTopProducts(data);
