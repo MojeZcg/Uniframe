@@ -5,15 +5,17 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { useDebouncedCallback } from "use-debounce";
 
-const WAIT_BETWEEN_CHANGE = 350;
+const WAIT_BETWEEN_CHANGE = 600;
 
 export default function Search({
   placeholder,
 }: Readonly<{ placeholder: string }>) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const [focus, setFocus] = useState(false);
+
   const { replace } = useRouter();
+
+  const [focus, setFocus] = useState(false);
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
@@ -31,7 +33,7 @@ export default function Search({
   }, WAIT_BETWEEN_CHANGE);
 
   return (
-    <form className="flex w-full items-center justify-end overflow-hidden  p-0.5">
+    <form className="flex w-full items-center justify-end overflow-hidden rounded-lg">
       <Input
         type="text"
         onChange={(e) => handleSearch(e.target.value)}
@@ -42,7 +44,9 @@ export default function Search({
         className=" z-50 h-full w-full rounded-lg bg-white px-3 py-2 text-base font-normal text-black 2xl:text-2xl "
       />
       <button type="submit" className="fixed z-50 px-3 text-black">
-        {focus && <MagnifyingGlassIcon className=" h-6 w-6" />}
+        {(focus || pathname == "/store") && (
+          <MagnifyingGlassIcon className=" h-6 w-6" />
+        )}
       </button>
     </form>
   );
