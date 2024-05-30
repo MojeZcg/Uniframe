@@ -83,8 +83,8 @@ export default function RootLayout({
               <Popover>
                 <PopoverTrigger asChild>
                   <Button>
-                    <div>
-                      <strong className="mr-2 text-base">Carrito</strong>
+                    <div className="mr-2.5 flex flex-col items-end justify-end">
+                      <strong className=" text-base">Carrito</strong>
                       <h4 className="text-xs">$300</h4>
                     </div>
                     <ShoppingCartIcon className="h-7 w-7 text-black 2xl:h-9 2xl:w-9" />
