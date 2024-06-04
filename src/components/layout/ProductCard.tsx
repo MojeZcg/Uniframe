@@ -12,7 +12,6 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { ShoppingCartIcon } from "@heroicons/react/16/solid";
 import Image from "next/image";
-import { AspectRatio } from "../ui/aspect-ratio";
 
 export default function ProductCard({
   product,
