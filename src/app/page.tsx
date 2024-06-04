@@ -34,9 +34,7 @@ export default async function Home() {
 
         <TopProducts />
       </div>
-      <h2 className="mb-4 pl-5 text-4xl font-normal text-white md:pt-4">
-        PROCESO DE ELABORACIÓN
-      </h2>
+
       <div className="flex w-full items-center justify-center  ">
         <Separator className="w-full bg-white pt-0.5" />
       </div>
@@ -63,10 +61,10 @@ export default async function Home() {
         <div className=" flex h-screen w-full items-center justify-center overflow-hidden ">
           <div className="absolute z-30 h-screen w-full bg-black opacity-60"></div>
           <Image
-            src="/wall.jpg"
+            src="/wall.jpeg"
             alt="Collage image 2"
-            width={1920}
-            height={1000}
+            width={1080}
+            height={1920}
             className=" z-10 w-full rounded-none  object-cover"
           />
         </div>
