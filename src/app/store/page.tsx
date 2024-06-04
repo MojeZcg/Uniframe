@@ -25,7 +25,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
-import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -51,6 +50,7 @@ type Filter = {
   orderName: string;
   price: number[];
   materials: string;
+  cuotes: number;
 };
 
 const fetchMaterials = async () => {
@@ -92,6 +92,7 @@ export default function Store() {
     orderName: "Más Relevantes",
     price: [0, DEFAULT_VALUE],
     materials: "",
+    cuotes: 0,
   });
 
   const [loading, setLoading] = useState(false);
@@ -135,6 +136,12 @@ export default function Store() {
     getProducts();
   }, [currentPage, filters, searchParams]);
 
+  const cuotes = [
+    { id: 1, name: "3 Cuotas sin interes" },
+    { id: 2, name: "6 Cuotas sin interes" },
+    { id: 3, name: "9 Cuotas sin interes" },
+  ];
+
   const Pages = createArray(pagination.totalPages);
 
   const orderOptions = [
@@ -144,18 +151,18 @@ export default function Store() {
   ];
 
   return (
-    <div>
+    <div className="min-h-screen bg-neutral-950 p-4 text-gray-100">
       <div className="flex items-center justify-between pt-4">
         <div className="flex w-1/2 items-center justify-between">
           <h1 className="pl-6 text-3xl font-semibold">MARCOS</h1>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Label className="flex items-center justify-center gap-0.5 text-sm">
+              <Label className="flex items-center justify-center gap-0.5 text-sm text-gray-300">
                 Ordenar
                 <ChevronDown className="h-5 w-5" />
               </Label>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-52">
+            <DropdownMenuContent className="w-52 bg-gray-800 text-gray-300">
               <DropdownMenuLabel className="text-neutral-300">
                 {filters.orderName}
               </DropdownMenuLabel>
@@ -182,54 +189,27 @@ export default function Store() {
         </div>
       </div>
 
-      <Separator className="mb-5 mt-4 h-0.5 w-full bg-white" />
+      <Separator className="mb-5 mt-4 h-0.5 w-full bg-gray-700" />
 
       <div className="flex h-auto w-full justify-between">
-        <div className="ml-3 w-[16rem] 2xl:w-[20rem]">
-          <h3 className="text-2xl">Filtros</h3>
-          <Accordion type="multiple" className="w-full">
-            <AccordionItem value="price">
-              <AccordionTrigger>Precio</AccordionTrigger>
-              <AccordionContent className="">
-                <div className="flex w-full items-center justify-between">
-                  <strong>Rango de Precios:</strong>
-                  <span className="">
-                    ${range[0] || "0"} - ${filterPrice}{" "}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  id="rangeInput"
-                  min={range[0]}
-                  max={range[1]}
-                  value={filterPrice}
-                  step={500}
-                  onChange={(e) => setFilterPrice(Number(e.target.value))}
-                  className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-800"
-                />
-                <div className=" pt-1">
-                  <Button
-                    variant="outline"
-                    onClick={() =>
-                      setFilters(() => ({
-                        ...filters,
-                        price: [Number(range[0]), filterPrice],
-                      }))
-                    }
-                    className="rounded-xl px-4 py-1"
-                  >
-                    Aplicar
-                  </Button>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="materials">
-              <AccordionTrigger>Materiales</AccordionTrigger>
-              <AccordionContent className="flex flex-col">
+        <div className=" h-96 w-[16rem] 2xl:w-[20rem]">
+          <Accordion
+            type="multiple"
+            className="w-full rounded-lg bg-neutral-800 p-4 shadow-md"
+          >
+            <h3 className="pb-2 text-2xl text-gray-300">Filtros</h3>
+            <AccordionItem
+              value="materials"
+              className="mb-2 border-b border-gray-600"
+            >
+              <AccordionTrigger className="py-2 text-lg font-semibold text-gray-200 hover:text-gray-400">
+                Materiales
+              </AccordionTrigger>
+              <AccordionContent className="mt-2 flex flex-col space-y-1">
                 {materials.map((material) => (
                   <button
                     key={material.material_id}
-                    className="flex items-center gap-2 py-1.5"
+                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-all hover:bg-gray-700"
                     onClick={() =>
                       setFilters((prevFilters) => ({
                         ...prevFilters,
@@ -239,21 +219,108 @@ export default function Store() {
                   >
                     <Checkbox
                       id={material.material_slug}
-                      className="h-5 w-5 rounded-lg"
+                      className="h-5 w-5 rounded-lg border-gray-400"
                     />
-                    <Label htmlFor={material.material_slug}>
+                    <Label
+                      htmlFor={material.material_slug}
+                      className="text-gray-300"
+                    >
                       {material.material_name}
                     </Label>
                   </button>
                 ))}
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="shipping">
-              <AccordionTrigger>Envío</AccordionTrigger>
-              <AccordionContent>
+
+            <AccordionItem
+              value="price"
+              className="mb-2 border-b border-gray-600"
+            >
+              <AccordionTrigger className="py-2 text-lg font-semibold text-gray-200 hover:text-gray-400">
+                Precio
+              </AccordionTrigger>
+              <AccordionContent className="mt-2 px-2">
+                <div className="flex w-full items-center justify-between">
+                  <strong className="text-[0.9rem] text-gray-300">
+                    Precio Seleccionado:
+                  </strong>
+                  <span className="text-[0.9rem] text-gray-300">
+                    {filterPrice === DEFAULT_VALUE
+                      ? "Todos"
+                      : `$ ${range[0] || "0"} - $ ${filterPrice}`}
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  id="rangeInput"
+                  min={range[0]}
+                  max={range[1]}
+                  value={filterPrice}
+                  step={1000}
+                  onChange={(e) => setFilterPrice(Number(e.target.value))}
+                  className="my-2 h-2 w-full cursor-pointer appearance-none rounded-lg border border-neutral-700 bg-neutral-800"
+                />
+                <div className="flex justify-end pt-1">
+                  <Button
+                    variant="outline"
+                    onClick={() =>
+                      setFilters(() => ({
+                        ...filters,
+                        price: [Number(range[0]), filterPrice],
+                      }))
+                    }
+                    className="h-9 rounded-lg border border-neutral-400"
+                  >
+                    Aplicar
+                  </Button>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem
+              value="cuotes"
+              className="mb-2 border-b border-gray-600"
+            >
+              <AccordionTrigger className="py-2 text-lg font-semibold text-gray-200 hover:text-gray-400">
+                Cuotas
+              </AccordionTrigger>
+              <AccordionContent className="mt-2 space-y-1 px-2">
+                {cuotes.map((cuote) => (
+                  <button
+                    key={cuote.id}
+                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-all hover:bg-gray-700"
+                    onClick={() =>
+                      setFilters((prevFilters) => ({
+                        ...prevFilters,
+                        cuotes: cuote.id,
+                      }))
+                    }
+                  >
+                    <Checkbox
+                      id={cuote.name}
+                      className="h-5 w-5 rounded-lg border-gray-400"
+                    />
+                    <Label htmlFor={cuote.name} className="text-gray-300">
+                      {cuote.name}
+                    </Label>
+                  </button>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem
+              value="shipping"
+              className="mb-2 border-b border-gray-600"
+            >
+              <AccordionTrigger className="py-2 text-lg font-semibold text-gray-200 hover:text-gray-400">
+                Envío
+              </AccordionTrigger>
+              <AccordionContent className="mt-2 px-2">
                 <div className="flex items-center gap-1.5 py-1">
-                  <Switch id="free-shipping" />
-                  <Label htmlFor="free-shipping">Envío Gratis</Label>
+                  <Switch id="free-shipping" className="text-green-600" />
+                  <Label htmlFor="free-shipping" className="text-gray-300">
+                    Envío Gratis
+                  </Label>
                   <FiPackage className="h-5 w-5 text-green-600" />
                 </div>
               </AccordionContent>
