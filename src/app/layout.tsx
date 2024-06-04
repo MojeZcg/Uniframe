@@ -74,11 +74,9 @@ export default function RootLayout({
                   height={25}
                 />
               </Link>
-              <div>
-                <RouteList />
-              </div>
+              <RouteList />
             </div>
-            <div className="hidden w-[40%] items-center justify-end gap-0 pr-10 md:flex xl:w-[52%] xl:pl-5 2xl:w-6/12">
+            <div className="hidden w-[40%] items-center justify-end gap-0 pr-6 md:flex xl:w-[52%] xl:pl-5 2xl:w-6/12">
               <LayoutSearch />
               <Popover>
                 <PopoverTrigger asChild>
