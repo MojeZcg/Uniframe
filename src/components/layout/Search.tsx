@@ -16,7 +16,7 @@ export default function Search({
   const { replace } = useRouter();
 
   const [focus, setFocus] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null); // Crear una referencia para el campo de entrada
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
@@ -35,9 +35,9 @@ export default function Search({
 
   useEffect(() => {
     if (pathname === "/store" && inputRef.current) {
-      inputRef.current.focus(); // Enfocar el campo de entrada
+      inputRef.current.focus();
     }
-  }, [pathname]); // Ejecutar el efecto cuando el pathname cambia
+  }, [pathname]);
 
   return (
     <form className="flex w-full items-center justify-end overflow-hidden rounded-lg">
