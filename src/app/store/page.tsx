@@ -51,6 +51,7 @@ type Filter = {
   price: number[];
   materials: string;
   cuotes: number;
+  freeshipping: boolean;
 };
 
 const fetchMaterials = async () => {
@@ -93,6 +94,7 @@ export default function Store() {
     price: [0, DEFAULT_VALUE],
     materials: "",
     cuotes: 0,
+    freeshipping: false,
   });
 
   const [loading, setLoading] = useState(false);
@@ -113,7 +115,7 @@ export default function Store() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/products?q=${encodedQuery}&p=${currentPage}&o=${filters.order}&price=${filters.price[1] === DEFAULT_VALUE ? "none" : filters.price}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/products?q=${encodedQuery}&p=${currentPage}&o=${filters.order}&price=${filters.price[1] === DEFAULT_VALUE ? "none" : filters.price}&f=${filters.freeshipping}`,
       );
 
       if (res.ok) {
@@ -150,54 +152,62 @@ export default function Store() {
     { id: "desc", name: "Mayor Precio" },
   ];
 
+  const handleCheck = () => {
+    setFilters({
+      ...filters,
+      freeshipping: !filters.freeshipping,
+    });
+  };
+
   return (
-    <div className="min-h-screen bg-neutral-950 p-4 text-gray-100">
-      <div className="flex items-center justify-between pt-4">
-        <div className="flex w-1/2 items-center justify-between">
-          <h1 className="pl-6 text-3xl font-semibold">MARCOS</h1>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Label className="flex items-center justify-center gap-0.5 text-sm text-gray-300">
-                Ordenar
-                <ChevronDown className="h-5 w-5" />
-              </Label>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-52 bg-gray-800 text-gray-300">
-              <DropdownMenuLabel className="text-neutral-300">
-                {filters.orderName}
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {orderOptions.map((ord) => (
-                <DropdownMenuCheckboxItem
-                  key={ord.id}
-                  onClick={() =>
-                    setFilters((prevFilters) => ({
-                      ...prevFilters,
-                      order: ord.id,
-                      orderName: ord.name,
-                    }))
-                  }
-                >
-                  {ord.name}
-                </DropdownMenuCheckboxItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+    <div className="min-h-screen bg-zinc-950  text-gray-100">
+      <div className="px-4">
+        <div className="flex items-center justify-between pt-4">
+          <div className="flex w-1/2 items-center justify-between">
+            <h1 className="pl-6 text-3xl font-semibold">MARCOS</h1>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Label className="flex items-center justify-center gap-0.5 text-sm text-gray-300">
+                  Ordenar
+                  <ChevronDown className="h-5 w-5" />
+                </Label>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-52 bg-gray-800 text-gray-300">
+                <DropdownMenuLabel className="text-neutral-300">
+                  {filters.orderName}
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {orderOptions.map((ord) => (
+                  <DropdownMenuCheckboxItem
+                    key={ord.id}
+                    onClick={() =>
+                      setFilters((prevFilters) => ({
+                        ...prevFilters,
+                        order: ord.id,
+                        orderName: ord.name,
+                      }))
+                    }
+                  >
+                    {ord.name}
+                  </DropdownMenuCheckboxItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <div className="w-[48%] pr-8 text-black">
+            <Search placeholder="Busca productos, materiales y más..." />
+          </div>
         </div>
-        <div className="w-[48%] pr-8 text-black">
-          <Search placeholder="Busca productos, materiales y más..." />
-        </div>
+
+        <Separator className="mb-5 mt-4 h-0.5 w-full bg-neutral-500" />
       </div>
-
-      <Separator className="mb-5 mt-4 h-0.5 w-full bg-gray-700" />
-
-      <div className="flex h-auto w-full justify-between">
+      <div className="flex h-auto w-full justify-between px-2">
         <div className=" h-96 w-[16rem] 2xl:w-[20rem]">
           <Accordion
             type="multiple"
-            className="w-full rounded-lg bg-neutral-800 p-4 shadow-md"
+            className="w-full rounded-lg bg-neutral-900 p-4 shadow-md"
           >
-            <h3 className="pb-2 text-2xl text-gray-300">Filtros</h3>
+            <h3 className="pb-2 text-2xl text-gray-200">Filtros</h3>
             <AccordionItem
               value="materials"
               className="mb-2 border-b border-gray-600"
@@ -242,12 +252,12 @@ export default function Store() {
               <AccordionContent className="mt-2 px-2">
                 <div className="flex w-full items-center justify-between">
                   <strong className="text-[0.9rem] text-gray-300">
-                    Precio Seleccionado:
+                    Máximo:
                   </strong>
                   <span className="text-[0.9rem] text-gray-300">
                     {filterPrice === DEFAULT_VALUE
                       ? "Todos"
-                      : `$ ${range[0] || "0"} - $ ${filterPrice}`}
+                      : `$ ${filterPrice}`}
                   </span>
                 </div>
                 <input
@@ -317,7 +327,12 @@ export default function Store() {
               </AccordionTrigger>
               <AccordionContent className="mt-2 px-2">
                 <div className="flex items-center gap-1.5 py-1">
-                  <Switch id="free-shipping" className="text-green-600" />
+                  <Switch
+                    checked={filters.freeshipping}
+                    onCheckedChange={() => handleCheck()}
+                    id="free-shipping"
+                    className="text-green-600"
+                  />
                   <Label htmlFor="free-shipping" className="text-gray-300">
                     Envío Gratis
                   </Label>
