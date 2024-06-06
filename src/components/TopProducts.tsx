@@ -31,7 +31,7 @@ export function TopProducts() {
   }, []);
 
   return (
-    <div className="my-6 flex h-[30rem] w-full items-center justify-center">
+    <div className="my-6 flex h-[30rem] w-full items-center justify-center 2xl:h-[34rem]">
       <div className=" h-[29rem] w-[20.5rem] overflow-hidden py-6 md:hidden">
         <MobileSlider products={topProducts} />
       </div>
