@@ -25,14 +25,14 @@ export default function ProductCard({
   return (
     <Card
       key={product.product_id}
-      className="flex h-[29rem] max-h-[29rem] max-w-[20rem] flex-col items-start justify-center overflow-hidden rounded-xl border border-neutral-400 bg-neutral-950 p-4 text-white"
+      className="flex h-[29rem] w-[20rem] flex-col items-start justify-center overflow-hidden rounded-xl border border-neutral-400 bg-neutral-950 p-4 text-white 2xl:h-[36rem] 2xl:w-[24rem]"
     >
-      <div className="z-50 ml-auto mr-auto flex h-[16.5rem] w-[13rem] items-center justify-center pt-1">
+      <div className="z-50 ml-auto mr-auto flex h-[16.5rem] w-[13rem] items-center justify-center pt-1 2xl:h-[20rem] 2xl:w-[14.75rem]">
         <Carousel>
           <CarouselContent>
             {images.map((image) => (
               <CarouselItem key={image.id}>
-                <div className="flex h-64 select-none items-center justify-center">
+                <div className="flex h-64 select-none items-center justify-center 2xl:h-80">
                   <Image
                     src={image.src}
                     alt={`${product.product_name} Image - ${image.id}`}
@@ -54,34 +54,36 @@ export default function ProductCard({
         className="h-auto w-full"
       >
         <div className="flex w-full flex-col">
-          <h6 className="block truncate py-2 text-2xl font-semibold text-gray-200">
+          <h6 className="block truncate py-2 text-2xl font-semibold text-gray-200 2xl:text-4xl">
             {product.product_name}
           </h6>
           <div className="flex flex-col gap-0 pb-2">
-            <p className="mb-1 line-clamp-2 text-sm text-gray-400">
+            <p className="mb-1 line-clamp-2 text-sm text-gray-400 2xl:text-lg">
               {product.product_description}
             </p>
-            <strong className="text-2xl text-gray-300">
+            <strong className="text-2xl text-gray-300 2xl:mt-1 2xl:text-3xl">
               ${product.product_price}
             </strong>
           </div>
 
-          {product.product_availables != 0 ? (
-            <Button
-              variant="outline"
-              className="rounded-lg border-gray-500 text-gray-300 hover:bg-gray-700"
-            >
-              Agregar al carrito <ShoppingCartIcon className="ml-2 h-5 w-5" />
-            </Button>
-          ) : (
-            <Button
-              disabled
-              variant="outline"
-              className="border-gray-600 text-gray-400"
-            >
-              Sold Out
-            </Button>
-          )}
+          <div className="flex w-full flex-col 2xl:mt-2">
+            {product.product_availables != 0 ? (
+              <Button
+                variant="outline"
+                className="rounded-lg border-gray-500 text-gray-300 hover:bg-gray-700 2xl:text-lg"
+              >
+                Agregar al carrito <ShoppingCartIcon className="ml-2 h-5 w-5" />
+              </Button>
+            ) : (
+              <Button
+                disabled
+                variant="outline"
+                className="border-gray-600 text-gray-400 2xl:text-lg"
+              >
+                Sold Out
+              </Button>
+            )}
+          </div>
         </div>
       </Link>
     </Card>
