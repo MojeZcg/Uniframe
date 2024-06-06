@@ -50,7 +50,7 @@ export default function Search({
         onBlur={() => setFocus(false)}
         defaultValue={searchParams.get("q")?.toString()}
         placeholder={placeholder}
-        className=" z-50 h-full w-full rounded-lg bg-white px-3 py-2 text-base font-normal text-black 2xl:text-2xl "
+        className=" z-50 h-full w-full rounded-lg bg-white px-3 py-2 text-base font-normal text-black 2xl:px-4 2xl:py-3 2xl:text-2xl "
       />
       <button type="submit" className="fixed z-50 px-3 text-black">
         {(focus || pathname === "/store") && (
