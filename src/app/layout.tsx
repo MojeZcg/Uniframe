@@ -99,11 +99,7 @@ export default function RootLayout({
             </div>
           </div>
 
-          {isMenuOpen && (
-            <ul>
-              <li></li>
-            </ul>
-          )}
+          {isMenuOpen && <div></div>}
         </nav>
 
         {children}
