@@ -1,7 +1,15 @@
+import Image from "next/image";
+
 export default function page({ params }: { params: { product_id: string } }) {
   return (
-    <div className="text-7xl text-white">
-      Producto numero {params.product_id}
-    </div>
+    <section className="">
+      <div> </div>
+      <div>
+        <div>
+          <Image alt="" src="" />
+        </div>
+        <div></div>
+      </div>
+    </section>
   );
 }
