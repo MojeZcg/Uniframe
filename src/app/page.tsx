@@ -1,7 +1,13 @@
 import { Separator } from "@/components/ui/separator";
 import { TopProducts } from "@/components/TopProducts";
 import Image from "next/image";
-import Carousel from "@/components/Carousel";
+import MainCarousel from "@/components/Carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export default async function Home() {
   return (
@@ -21,18 +27,24 @@ export default async function Home() {
             </div>
           </div>
           <div className="w-full cursor-default select-none xl:h-[calc(100vh-4.8rem)] 2xl:h-[calc(100vh-12rem)]">
-            <Carousel />
+            <MainCarousel />
           </div>
         </div>
       </div>
 
-      <div className="flex w-full flex-col items-center justify-center ">
-        <h3 className=" mb-4 mt-10 px-10 text-center text-2xl font-medium text-[#bfbfbf] underline underline-offset-[6px] md:text-4xl 2xl:mb-8 2xl:mt-16 2xl:text-5xl">
+      <div className="flex w-full flex-col items-center justify-center py-10 ">
+        <h3 className=" mb-4 px-10 text-center text-2xl font-medium text-[#bfbfbf] underline underline-offset-[6px] md:text-4xl 2xl:mb-8 2xl:text-5xl">
           NUESTROS <span className=" font-bold text-white">PRODUCTOS</span> MAS
           VENDIDOS
         </h3>
 
-        <TopProducts />
+        <Carousel className="z-50 flex w-[calc(100vw-9rem)] items-center justify-center 2xl:w-[calc(100vw-14rem)]">
+          <CarouselContent className="">
+            <TopProducts />
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </div>
 
       <div className="flex w-full items-center justify-center  ">

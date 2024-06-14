@@ -4,6 +4,7 @@ import MobileSlider from "./MobileSlider";
 import { Product } from "@/lib/types";
 import ProductsSkeleton from "./skeletons/ProductsSkeleton";
 import ProductCard from "./layout/ProductCard";
+import { CarouselItem } from "./ui/carousel";
 
 export function TopProducts() {
   const [topProducts, setTopProducts] = useState<Product[] | null>(null);
@@ -31,21 +32,22 @@ export function TopProducts() {
   }, []);
 
   return (
-    <div className="my-6 flex h-[30rem] w-full items-center justify-center 2xl:h-[34rem]">
+    <>
       <div className=" h-[29rem] w-[20.5rem] overflow-hidden py-6 md:hidden">
         <MobileSlider products={topProducts} />
       </div>
 
       {loading && (
-        <div className="mx-2 flex flex-wrap items-center justify-center gap-3 ">
+        <CarouselItem className="mx-2 flex flex-wrap items-center justify-center gap-3 ">
           <ProductsSkeleton timesSkeleton={4} />
-        </div>
+        </CarouselItem>
       )}
-      <div className="mx-2 flex flex-wrap items-center justify-center gap-3">
-        {topProducts?.map((p: Product) => (
-          <ProductCard key={p.product_id} product={p} />
-        ))}
-      </div>
-    </div>
+
+      {topProducts?.map((p: Product) => (
+        <CarouselItem className=" basis-1/3 pl-12 " key={p.product_id}>
+          <ProductCard product={p} />
+        </CarouselItem>
+      ))}
+    </>
   );
 }
