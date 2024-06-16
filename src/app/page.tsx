@@ -33,7 +33,7 @@ export default async function Home() {
       </div>
 
       <div className="flex w-full flex-col items-center justify-center py-10 ">
-        <h3 className=" mb-4 px-10 text-center text-2xl font-medium text-[#bfbfbf] underline underline-offset-[6px] md:text-4xl 2xl:mb-8 2xl:text-5xl">
+        <h3 className=" mb-10 px-10 text-center text-2xl font-medium text-[#bfbfbf] underline underline-offset-[6px] md:text-4xl 2xl:mb-8 2xl:text-5xl">
           NUESTROS <span className=" font-bold text-white">PRODUCTOS</span> MAS
           VENDIDOS
         </h3>
