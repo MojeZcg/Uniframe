@@ -33,13 +33,13 @@ export default async function Home() {
       </div>
 
       <div className="flex w-full flex-col items-center justify-center py-10 ">
-        <h3 className=" mb-10 px-10 text-center text-2xl font-medium text-[#bfbfbf] underline underline-offset-[6px] md:text-4xl 2xl:mb-8 2xl:text-5xl">
+        <h3 className="mb-10 px-10 text-center text-2xl font-medium text-[#bfbfbf] underline underline-offset-[6px] md:text-4xl 2xl:mb-8 2xl:text-5xl">
           NUESTROS <span className=" font-bold text-white">PRODUCTOS</span> MAS
           VENDIDOS
         </h3>
 
         <Carousel className="z-50 flex w-[calc(100vw-9rem)] items-center justify-center 2xl:w-[calc(100vw-14rem)]">
-          <CarouselContent className="">
+          <CarouselContent>
             <TopProducts />
           </CarouselContent>
           <CarouselPrevious />
@@ -50,9 +50,9 @@ export default async function Home() {
       <div className="flex w-full items-center justify-center  ">
         <Separator className="w-full bg-white pt-0.5" />
       </div>
-      <section className="max-w-full  text-white">
+      <section className="max-w-full text-white">
         <div className="bg-main-gradient text-small flex h-96 w-full items-center  overflow-hidden ">
-          <div className="h-full  bg-black opacity-50 ">
+          <div className="h-full bg-black opacity-50 ">
             <Image
               src="/Products/materials.jpg"
               alt="Collage image 1"
