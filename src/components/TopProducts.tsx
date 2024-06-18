@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import MobileSlider from "./MobileSlider";
 import { Product } from "@/lib/types";
 import ProductsSkeleton from "./skeletons/ProductsSkeleton";
 import ProductCard from "./layout/ProductCard";
@@ -33,10 +32,6 @@ export function TopProducts() {
 
   return (
     <>
-      <div className=" h-[29rem] w-[20.5rem] overflow-hidden py-6 md:hidden">
-        <MobileSlider products={topProducts} />
-      </div>
-
       {loading && (
         <CarouselItem className="mx-2 flex flex-wrap items-center justify-center gap-3 ">
           <ProductsSkeleton timesSkeleton={4} />
@@ -44,7 +39,10 @@ export function TopProducts() {
       )}
 
       {topProducts?.map((p: Product) => (
-        <CarouselItem className=" basis-1/3 pl-12 " key={p.product_id}>
+        <CarouselItem
+          className=" flex items-center justify-center md:basis-1/3 "
+          key={p.product_id}
+        >
           <ProductCard product={p} />
         </CarouselItem>
       ))}
