@@ -25,14 +25,14 @@ export default function ProductCard({
   return (
     <Card
       key={product.product_id}
-      className="flex h-[29rem] w-[20rem] flex-col items-start justify-center overflow-hidden rounded-xl border border-neutral-400 bg-neutral-950 p-4 text-white 2xl:h-[36rem] 2xl:w-[24rem]"
+      className="flex h-[27rem] w-[20rem] flex-col items-start justify-center overflow-hidden rounded-xl border border-neutral-400 bg-neutral-950 p-4 text-white md:h-[29rem] md:w-[20rem] 2xl:h-[36rem] 2xl:w-[24rem]"
     >
-      <div className="z-50 ml-auto mr-auto flex h-[16.5rem] w-[13rem] items-center justify-center pt-1 2xl:h-[20rem] 2xl:w-[14.75rem]">
+      <div className="z-50 ml-auto mr-auto flex h-[15rem] w-[10rem] items-center justify-center pt-1 md:h-[16.5rem] md:w-[13rem] 2xl:h-[20rem] 2xl:w-[14.75rem]">
         <Carousel>
           <CarouselContent>
             {images.map((image) => (
               <CarouselItem key={image.id}>
-                <div className="flex h-64 select-none items-center justify-center 2xl:h-80">
+                <div className="flex h-52 select-none items-center justify-center md:h-64 2xl:h-80">
                   <Image
                     src={image.src}
                     alt={`${product.product_name} Image - ${image.id}`}
