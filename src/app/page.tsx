@@ -38,8 +38,8 @@ export default async function Home() {
           VENDIDOS
         </h3>
 
-        <Carousel className="z-50 flex w-[calc(100vw-9rem)] items-center justify-center 2xl:w-[calc(100vw-14rem)]">
-          <CarouselContent>
+        <Carousel className="z-50 flex w-[calc(100vw-13rem)] items-center justify-center 2xl:w-[calc(100vw-14rem)]">
+          <CarouselContent className="h-[30rem]">
             <TopProducts />
           </CarouselContent>
           <CarouselPrevious />
