@@ -33,14 +33,14 @@ export function TopProducts() {
   return (
     <>
       {loading && (
-        <CarouselItem className="mx-2 flex flex-wrap items-center justify-center gap-3 ">
-          <ProductsSkeleton timesSkeleton={4} />
+        <CarouselItem className="flex items-center justify-center md:basis-1/3">
+          <ProductsSkeleton timesSkeleton={3} />
         </CarouselItem>
       )}
 
       {topProducts?.map((p: Product) => (
         <CarouselItem
-          className=" flex items-center justify-center md:basis-1/3 "
+          className="flex items-center justify-center md:basis-1/3"
           key={p.product_id}
         >
           <ProductCard product={p} />
