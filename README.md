@@ -8,7 +8,7 @@ Uniframe specializes in premium frames for photographs. Browse our curated colle
 
 ## Installation
 
-First clone the repository by ssh:
+### First clone the repository:
 
 ```bash
 git clone git@github.com:MojeZcg/Uniframe.git
