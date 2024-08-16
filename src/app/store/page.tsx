@@ -357,8 +357,7 @@ export default function Store() {
                 No hay productos disponibles
               </div>
             )}
-            {!loading &&
-              products &&
+            {products &&
               products.length > 0 &&
               products.map((product) => (
                 <ProductCard key={product.product_id} product={product} />
