@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -107,7 +107,7 @@ export default function Store() {
     loadMaterials();
   }, []);
 
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     setLoading(true);
 
     const query = searchParams.get("q");
@@ -132,11 +132,11 @@ export default function Store() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, filters, searchParams, pagination]);
 
   useEffect(() => {
     getProducts();
-  }, [currentPage, filters, searchParams]);
+  }, [currentPage, filters, searchParams, getProducts]);
 
   const cuotes = [
     { id: 1, name: "3 Cuotas sin interes" },
@@ -172,14 +172,21 @@ export default function Store() {
                   <ChevronDown className="h-5 w-5" />
                 </Label>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-52 bg-gray-800 text-gray-300">
+              <DropdownMenuContent className="ml-28 mt-2 w-52 rounded-lg bg-neutral-900 text-gray-300">
                 <DropdownMenuLabel className="text-neutral-300">
                   {filters.orderName}
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator />
+                <DropdownMenuSeparator className="mb-1.5" />
                 {orderOptions.map((ord) => (
                   <DropdownMenuCheckboxItem
                     key={ord.id}
+                    className={` mx-2 my-1 rounded-lg ${
+                      filters.order == ord.id
+                        ? "  bg-neutral-700 text-white"
+                        : ""
+                    }
+                      
+                    `}
                     onClick={() =>
                       setFilters((prevFilters) => ({
                         ...prevFilters,
@@ -344,50 +351,57 @@ export default function Store() {
         </div>
         <div className="w-[calc(100vw-16rem)] 2xl:w-[calc(100vw-20rem)]">
           <div className="flex flex-wrap items-center justify-start gap-x-4 gap-y-3 pl-10 2xl:pl-8">
-            {loading ? (
-              <ProductsSkeleton timesSkeleton={6} />
-            ) : (
-              products?.map((product) => (
-                <ProductCard key={product.product_id} product={product} />
-              ))
+            {loading && <ProductsSkeleton timesSkeleton={6} />}
+            {!products && (
+              <div className="w-full pt-4 text-center text-xl text-gray-300">
+                No hay productos disponibles
+              </div>
             )}
-          </div>
-          <Pagination className="mt-8 flex justify-end pr-10">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious
-                  href="#"
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.max(prev - 1, 1))
-                  }
-                />
-              </PaginationItem>
-              {Pages.map((p) => (
-                <PaginationItem key={p.id}>
-                  <PaginationLink
-                    href="#"
-                    onClick={() => setCurrentPage(p.id)}
-                    isActive={currentPage === p.id}
-                  >
-                    {p.id}
-                  </PaginationLink>
-                </PaginationItem>
+            {!loading &&
+              products &&
+              products.length > 0 &&
+              products.map((product) => (
+                <ProductCard key={product.product_id} product={product} />
               ))}
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext
-                  href="#"
-                  onClick={() =>
-                    setCurrentPage((prev) =>
-                      Math.min(prev + 1, pagination.totalPages),
-                    )
-                  }
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+          </div>
+          {products && products.length > 0 && (
+            <Pagination className="mt-8 flex justify-end pr-10">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.max(prev - 1, 1))
+                    }
+                  />
+                </PaginationItem>
+                {Pages.map((p) => (
+                  <PaginationItem key={p.id}>
+                    <PaginationLink
+                      href="#"
+                      onClick={() => setCurrentPage(p.id)}
+                      isActive={currentPage === p.id}
+                    >
+                      {p.id}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    onClick={() =>
+                      setCurrentPage((prev) =>
+                        Math.min(prev + 1, pagination.totalPages),
+                      )
+                    }
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          )}
         </div>
       </div>
     </div>
