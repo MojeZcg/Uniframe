@@ -19,6 +19,7 @@ export default function RouteList() {
         <ShoppingCartIcon className="h-7 w-7" />
         <Bars3Icon className="h-9 w-9" />
       </li>
+
       {routes.map((route) => (
         <li
           key={route.name}
