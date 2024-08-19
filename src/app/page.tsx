@@ -21,13 +21,13 @@ export default async function Home() {
               </p>
             </div>
           </div>
-          <div className="w-full cursor-default select-none xl:h-[calc(100vh-4.8rem)] 2xl:h-[calc(100vh-12rem)]">
+          <div className="w-full cursor-default select-none border-b border-white xl:h-[calc(100vh-4.8rem)] 2xl:h-[calc(100vh-12rem)]">
             <MainCarousel />
           </div>
         </div>
       </div>
 
-      <div className="flex w-full flex-col items-center justify-center py-10 ">
+      <div className="flex w-full flex-col items-center justify-center py-8 ">
         <h3 className="mb-10 px-10 text-center text-2xl font-medium text-[#bfbfbf] underline underline-offset-[6px] md:text-4xl 2xl:mb-8 2xl:text-5xl">
           NUESTROS <span className=" font-bold text-white">PRODUCTOS</span> MAS
           VENDIDOS
