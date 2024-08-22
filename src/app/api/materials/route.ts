@@ -9,6 +9,16 @@ export async function GET() {
       },
     });
 
+    if (!materials.length) {
+      return NextResponse.json(
+        {
+          message: "No se encontraron materiales disponibles.",
+          status: "error",
+        },
+        { status: 404 },
+      );
+    }
+
     return NextResponse.json(materials);
   } catch (error) {
     console.error("Database query failed", error);

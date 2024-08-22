@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Product } from "@/lib/types";
 import ProductsSkeleton from "./skeletons/ProductsSkeleton";
 import ProductCard from "./layout/ProductCard";
-import { CarouselItem } from "./ui/carousel";
+import { CarouselItem, CarouselNext, CarouselPrevious, CarouselContent } from "@/components/ui/carousel";
 
 export function TopProducts() {
   const [topProducts, setTopProducts] = useState<Product[] | null>(null);
@@ -17,10 +17,11 @@ export function TopProducts() {
       );
       if (res) {
         const data = await res.json();
-        if (data) setTopProducts(data);
+        setTopProducts(data.length ? data : null);
       }
     } catch (error) {
       console.log(error);
+      setTopProducts(null);
     } finally {
       setLoading(false);
     }
@@ -30,15 +31,25 @@ export function TopProducts() {
     getProducts();
   }, []);
 
-  return (
-    <>
-      {loading && (
-        <CarouselItem className="flex items-center justify-center md:basis-1/3">
-          <ProductsSkeleton timesSkeleton={3} />
-        </CarouselItem>
-      )}
+  if (loading) {
+    return (
+      <div className="h-[30rem] flex items-center justify-center">
+        <ProductsSkeleton timesSkeleton={3} />
+      </div>
+    );
+  }
 
-      {topProducts?.map((p: Product) => (
+  if (!topProducts) {
+    return (
+      <div className="h-[20rem] flex items-center justify-center">
+        No hay productos disponibles.
+      </div>
+    );
+  }
+
+  return (
+    <CarouselContent className="h-[30rem]">
+      {topProducts.map((p: Product) => (
         <CarouselItem
           className="flex items-center justify-center md:basis-1/3"
           key={p.product_id}
@@ -46,6 +57,9 @@ export function TopProducts() {
           <ProductCard product={p} />
         </CarouselItem>
       ))}
-    </>
+      <CarouselPrevious />
+      <CarouselNext />
+    </CarouselContent>
   );
 }
+
