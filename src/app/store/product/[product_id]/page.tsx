@@ -2,7 +2,11 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export function productPage({ params }: { params: { product_id: string } }) {
+export default function ProductPage({
+  params,
+}: {
+  params: { product_id: string };
+}) {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState();
 
@@ -25,7 +29,7 @@ export function productPage({ params }: { params: { product_id: string } }) {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   return (
     <section className="">
