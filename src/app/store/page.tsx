@@ -136,7 +136,7 @@ export default function Store() {
 
   useEffect(() => {
     getProducts();
-  }, [currentPage, filters, searchParams]);
+  }, [currentPage, filters, searchParams, getProducts]);
 
   const cuotes = [
     { id: 1, name: "3 Cuotas sin interes" },
