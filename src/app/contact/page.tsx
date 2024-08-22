@@ -13,15 +13,15 @@ export default function Home() {
     {
       id: 1,
       label: "Nombre Completo",
-      place: "Maria Ana González",
+      place: "Nombre Completo*",
       type: "text",
-      isrequired: true,
+      isrequired: false,
     },
     {
       id: 2,
-      label: "Correo Electronico",
-      place: "contacto@example.com",
-      type: "email",
+      label: "Asunto",
+      place: "Asunto",
+      type: "text",
       isrequired: true,
     },
   ];
@@ -57,11 +57,11 @@ export default function Home() {
                 </div>
                 <Link
                   target="_blank"
-                  href="mailto:Uniframe@gmail.com"
+                  href="mailto:contact@uniframe.com"
                   className="pl-4"
                 >
                   <strong className=" text-xl text-white">
-                    Uniframe@gmail.com
+                    contact@uniframe.com
                   </strong>
                 </Link>
               </li>
