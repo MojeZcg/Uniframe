@@ -1,16 +1,16 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function ProductPage({
   params,
-}: {
+}: Readonly<{
   params: { product_id: string };
-}) {
+}>) {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState();
 
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch(
@@ -25,7 +25,7 @@ export default function ProductPage({
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.product_id]);
 
   useEffect(() => {
     getProducts();
