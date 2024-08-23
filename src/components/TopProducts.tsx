@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import { Product } from "@/lib/types";
 import ProductsSkeleton from "./skeletons/ProductsSkeleton";
 import ProductCard from "./layout/ProductCard";
-import { CarouselItem, CarouselNext, CarouselPrevious, CarouselContent } from "@/components/ui/carousel";
+import {
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselContent,
+} from "@/components/ui/carousel";
 
 export function TopProducts() {
   const [topProducts, setTopProducts] = useState<Product[] | null>(null);
@@ -33,7 +38,7 @@ export function TopProducts() {
 
   if (loading) {
     return (
-      <div className="h-[30rem] flex items-center justify-center">
+      <div className="flex h-[30rem] items-center justify-center gap-14">
         <ProductsSkeleton timesSkeleton={3} />
       </div>
     );
@@ -41,7 +46,7 @@ export function TopProducts() {
 
   if (!topProducts) {
     return (
-      <div className="h-[20rem] flex items-center justify-center">
+      <div className="flex h-[20rem] items-center justify-center">
         No hay productos disponibles.
       </div>
     );
@@ -62,4 +67,3 @@ export function TopProducts() {
     </CarouselContent>
   );
 }
-
