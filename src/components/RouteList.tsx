@@ -1,4 +1,5 @@
 "use client";
+import { Routes } from "@/lib/data";
 import { Bars3Icon, ShoppingCartIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -6,12 +7,10 @@ import { usePathname } from "next/navigation";
 export default function RouteList() {
   const pathName = usePathname();
 
-  const routes = [
-    { name: "Inicio", path: "/", current: pathName == "/" },
-    { name: "Tienda", path: "/store", current: pathName == "/store" },
-    { name: "Nosotros", path: "/about", current: pathName == "/about" },
-    { name: "Contactanos", path: "/contact", current: pathName == "/contact" },
-  ];
+  const routes = Routes.map((route) => ({
+    ...route,
+    current: pathName === route.path,
+  }));
 
   return (
     <ul className=" flex gap-6 px-4 text-lg font-medium md:pl-0 xl:gap-6 2xl:text-2xl ">

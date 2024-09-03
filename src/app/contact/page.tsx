@@ -1,4 +1,4 @@
-import { Socials } from "@/lib/data";
+import { contactFields, Socials } from "@/lib/data";
 import Link from "next/link";
 
 import { IoMailOutline, IoCallOutline } from "react-icons/io5";
@@ -9,48 +9,51 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
-  const fields = [
-    {
-      id: 1,
-      label: "Nombre Completo",
-      place: "Nombre Completo*",
-      type: "text",
-      isrequired: false,
-    },
-    {
-      id: 2,
-      label: "Asunto",
-      place: "Asunto",
-      type: "text",
-      isrequired: true,
-    },
-  ];
-
   return (
-    <div className="bg-main-dark px-20 pt-16">
-      <div className=" grid max-w-full items-center gap-32 rounded-sm text-[#333] sm:grid-cols-2">
-        <div>
-          <h1 className="flex items-center text-6xl font-extrabold text-neutral-50">
-            Hablemos <IoCallOutline className=" ml-4 h-14 w-14" />
+    <div className="bg-main-dark px-20 pb-16 pt-16">
+      <div className=" grid max-w-full items-start gap-32 rounded-sm text-[#333] sm:grid-cols-2">
+        <div className="">
+          <h1 className="flex items-center pb-3 text-6xl font-extrabold text-neutral-50">
+            Hablemos <IoCallOutline className=" ml-4 h-11 w-11" />
           </h1>
-          <p className="mt-3 text-sm text-gray-400">
+          <p className=" text-sm text-gray-400">
             ¡Nos encantaría saber de ti! ¿Tienes alguna pregunta, sugerencia o
             simplemente quieres charlar sobre arte? No dudes en ponerte en
             contacto con nosotros. Estamos aquí para ayudarte. Envíanos un
             correo electrónico a{" "}
-            <Link href="mailto:info@uniframe.com" className="text-blue-400 ">
+            <Link
+              href="mailto:info@uniframe.com"
+              target="_blank"
+              className="text-blue-400 "
+            >
               info@uniframe.com
             </Link>{" "}
             o llámanos al{" "}
-            <Link href="tel:+542614995742" className="text-blue-400 ">
+            <Link
+              href="tel:+542614995742"
+              target="_blank"
+              className="text-blue-400 "
+            >
               +542614995742
             </Link>
-            . También puedes visitarnos en nuestra sucursal en [dirección],
-            ¡Esperamos verte pronto!
+            . También puedes visitarnos en nuestra sucursal en{" "}
+            <Link
+              href="https://maps.app.goo.gl/dntF5pP86fQCLB998"
+              target="_blank"
+              className="text-blue-400 "
+            >
+              San Martin 644, Lujan de Cuyo, Mendoza
+            </Link>
+            .
           </p>
-          <div className="mt-6">
-            <h2 className="text-2xl font-extrabold text-neutral-200">Email</h2>
-            <ul className="mt-2">
+          <span className="text-base text-neutral-200">
+            ¡Esperamos verte pronto!
+          </span>
+          <div className="pt-3">
+            <h2 className="pb-3 text-2xl font-extrabold text-neutral-200">
+              Email
+            </h2>
+            <ul className="pb-6">
               <li className="flex items-center">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white">
                   <IoMailOutline className="h-8 w-8 text-black" />
@@ -67,11 +70,11 @@ export default function Home() {
               </li>
             </ul>
           </div>
-          <div className="mt-6">
-            <h2 className="text-2xl font-extrabold text-neutral-200">
+          <div className="">
+            <h2 className="pb-3 text-2xl font-extrabold text-neutral-200">
               Nuestras Redes
             </h2>
-            <ul className=" mt-2 flex space-x-5">
+            <ul className="flex space-x-5">
               {Socials.map((social) => (
                 <li
                   key={social.id}
@@ -89,7 +92,7 @@ export default function Home() {
 
         <form className="ml-auto w-full space-y-8">
           <div className="space-y-5">
-            {fields.map((field) => (
+            {contactFields.map((field) => (
               <Input
                 required
                 key={field.id}
@@ -115,9 +118,6 @@ export default function Home() {
             <IoIosSend className="ml-2 h-5 w-5" />
           </Button>
         </form>
-      </div>
-      <div className=" z-50 mt-32 py-4">
-        <Separator className=" h-0.5 rounded-full bg-white" />
       </div>
     </div>
   );
