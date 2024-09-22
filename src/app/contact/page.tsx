@@ -46,7 +46,7 @@ export default function Home() {
             </Link>
             .
           </p>
-          <span className="text-base text-neutral-200">
+          <span className="text-sm font-bold text-neutral-100">
             ¡Esperamos verte pronto!
           </span>
           <div className="pt-3">
@@ -61,10 +61,10 @@ export default function Home() {
                 <Link
                   target="_blank"
                   href="mailto:contact@uniframe.com"
-                  className="pl-4"
+                  className="pl-3"
                 >
-                  <strong className=" text-xl text-white">
-                    contact@uniframe.com
+                  <strong className="text-xl font-light text-white">
+                    Contact@uniframe.com
                   </strong>
                 </Link>
               </li>
