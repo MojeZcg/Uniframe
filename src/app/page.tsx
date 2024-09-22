@@ -1,33 +1,38 @@
 import { Separator } from "@/components/ui/separator";
 import { TopProducts } from "@/components/TopProducts";
 import Image from "next/image";
-import MainCarousel from "@/components/Carousel";
+import { Raleway } from "next/font/google";
+
 import { Carousel } from "@/components/ui/carousel";
+
+const title_font = Raleway({
+  subsets: ["latin"],
+  weight: ["700"],
+});
 
 export default async function Home() {
   return (
     <main>
-      <div className=" flex h-[calc(100vh)] flex-col items-start md:h-[calc(100vh-4.8rem)] md:flex-row md:justify-center 2xl:h-[calc(100vh-10rem)] ">
-        <div className="bg-main-dark z-30 flex h-[calc(100vh)] w-full flex-col items-center justify-center overflow-hidden  md:h-[calc(100vh-4.8rem)] md:flex-row 2xl:h-[calc(100vh-13rem)]">
-          <div className="bg-main-dark z-20 flex h-[calc(100vh-30rem)] items-start justify-center border-b border-white  shadow-2xl shadow-black md:h-[calc(100vh-4.8rem)] md:w-[33.5rem]  2xl:h-[calc(100vh-13rem)] 2xl:w-[46rem]">
-            <div className=" bg-main-dark flex w-full flex-col items-start justify-center text-start md:w-[19rem] md:p-0 2xl:w-[26rem] 2xl:pt-6">
-              <h3 className=" py-8 text-5xl font-extrabold leading-[3.1rem] md:pb-6 md:pt-14 md:text-[3.2rem] 2xl:py-9 2xl:text-6xl 2xl:font-black 2xl:leading-[4.5rem]">
-                Bienvenido a Uniframe!
-              </h3>
-              <p className=" text-2xl font-medium leading-tight text-neutral-500 md:text-3xl 2xl:text-[3rem] 2xl:leading-[1.15] ">
-                Encuentra tu inspiración en cada obra. Explora nuestra exclusiva
-                colección de cuadros y transforma tu espacio con arte
-                excepcional.
-              </p>
-            </div>
-          </div>
-          <div className="w-full cursor-default select-none border-b border-white xl:h-[calc(100vh-4.8rem)] 2xl:h-[calc(100vh-12rem)]">
-            <MainCarousel />
-          </div>
-        </div>
+      <div className=" flex h-[calc(100vh-5rem)] w-full flex-col items-center justify-center">
+        <Image
+          src="/Home/main.jpg"
+          alt="Collage image 5"
+          width={1920}
+          height={1080}
+          className="absolute -z-50 h-full w-full rounded-none bg-black object-cover opacity-20 "
+        />
+        <div className="absolute inset-x-0 -bottom-1 h-20 bg-gradient-to-t from-neutral-950 to-transparent"></div>
+        <h1
+          className={`pb-6 text-[5.2rem] ${title_font.className} font-extrabold text-neutral-50`}
+        >
+          BIENVENIDO A UNIFRAME!
+        </h1>
+        <h2 className="pb-4 text-2xl font-semibold text-neutral-100">
+          TRANSFORMANDO ESPACIOS, ENMARCANDO MOMENTOS.
+        </h2>
       </div>
 
-      <div className="flex w-full flex-col items-center justify-center py-8 ">
+      <div className="flex w-full flex-col items-center justify-center bg-neutral-950 py-8 ">
         <h3 className="mb-10 px-10 text-center text-2xl font-medium text-[#bfbfbf] underline underline-offset-[6px] md:text-4xl 2xl:mb-8 2xl:text-5xl">
           NUESTROS <span className=" font-bold text-white">PRODUCTOS</span> MAS
           VENDIDOS
@@ -38,40 +43,67 @@ export default async function Home() {
         </Carousel>
       </div>
 
-      <div className="flex w-full items-center justify-center  ">
+      <div className="flex w-full items-center justify-center">
         <Separator className="w-full bg-white pt-0.5" />
       </div>
       <section className="max-w-full text-white">
         <div className="bg-main-gradient text-small flex h-96 w-full items-center  overflow-hidden ">
-          <div className="h-full bg-black opacity-50 ">
+          <div className="h-full w-[50%] bg-black opacity-50">
             <Image
               src="/Products/materials.jpg"
               alt="Collage image 1"
               width={1200}
               height={400}
-              className="h-full rounded-none object-cover "
+              className="h-full rounded-none object-cover"
             />
           </div>
           <Separator orientation="vertical" className="mx-0 bg-white pr-0.5" />
-          <p className="min-w-[60%] max-w-[65%] px-10 text-4xl font-normal leading-normal">
-            NUESTROS MARCOS, CONFECCIONADOS CON LOS MATERIALES MÁS FINOS Y
-            DURADEROS, SON EL EPÍTOME DE LA CALIDAD Y EL BUEN GUSTO.
-          </p>
+          <p className="w-[50%] px-10 text-4xl font-normal leading-normal"></p>
         </div>
-        <div className="flex w-full items-center  justify-center  ">
-          <Separator className="w-full bg-white pt-0.5" />
+        <div className="flex w-full items-center  justify-center">
+          <Separator className="w -full bg-white pt-0.5" />
         </div>
-        <div className=" flex h-screen w-full items-center justify-center overflow-hidden ">
-          <div className="absolute z-30 h-screen w-full bg-black opacity-60"></div>
+        <div className="bg-main-gradient text-small flex h-96 w-full items-center  overflow-hidden">
           <Image
-            src="/wall.jpeg"
-            alt="Collage image 2"
-            width={1080}
-            height={1920}
-            className=" z-10 w-full rounded-none  object-cover"
+            src="/Home/main-6.webp"
+            alt="Collage image 5"
+            width={1200}
+            height={800}
+            className="h-full w-1/3 rounded-none bg-black object-cover opacity-50"
           />
+          <Separator orientation="vertical" className="mx-0 bg-white pr-0.5" />
+          <p className="w-1/3 px-10 text-4xl font-normal leading-normal"></p>
+          <Separator orientation="vertical" className="mx-0 bg-white pr-0.5" />
+          <div className="h-full w-1/3 bg-black opacity-50 ">
+            <Image
+              src="/Home/main-5.jpg"
+              alt="Collage image 5"
+              width={1200}
+              height={400}
+              className="h-full rounded-none bg-black object-cover opacity-50 "
+            />
+          </div>
         </div>
       </section>
+      <div className="flex w-full items-center  justify-center">
+        <Separator className="w-full bg-white pt-0.5" />
+      </div>
+      <div className="bg-main-gradient text-small flex h-96 w-full items-center  overflow-hidden ">
+        <div className="h-full w-[70%] bg-black opacity-50">
+          <Image
+            src="/wall.jpeg"
+            alt="Collage image 1"
+            width={1200}
+            height={400}
+            className="h-full rounded-none object-cover"
+          />
+        </div>
+        <Separator orientation="vertical" className="mx-0 bg-white pr-0.5" />
+        <p className="w-[30%] px-10 text-4xl font-normal leading-normal"></p>
+      </div>
+      <div className="flex w-full items-center justify-center ">
+        <Separator className="w-full bg-white pt-0.5" />
+      </div>
     </main>
   );
 }
